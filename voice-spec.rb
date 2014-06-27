@@ -12,27 +12,44 @@ Capybara.register_driver :selenium_firefox_driver do |app|
   profile['media.navigator.permission.disabled'] = true
   Capybara::Selenium::Driver.new(app, browser: :firefox, profile: profile)
 end
-Capybara.current_driver = :selenium_firefox_driver
+Capybara.default_driver = :selenium_firefox_driver
 
 module Session
   extend Capybara::DSL
 
   def self.start
     visit '/'
-    sleep 1
+    sleep 2
     page.execute_script "lo = {login: '101', password: '0000'}; phone.app.login(lo); phone.app.getAccessToAudio();"
-    sleep 1
+    sleep 2
     page.execute_script "phone.app.call('000');"
     sleep 1
     page.execute_script "cid = phone.app.calls[0].id;"
     sleep 6
-    puts ">>> send DTMF 1"
+    # puts ">>> send DTMF 1"
     page.execute_script "phone.app.sendDTMF(cid, '1');"
     sleep 10
-    puts ">>> send DTMF 2"
+    # puts ">>> send DTMF 2"
     page.execute_script "phone.app.sendDTMF(cid, '2');"
     sleep 5
   end
 end
 
-Session.start
+arr = []
+
+arr << Thread.new {
+  Capybara.session_name = :one
+  Session.start
+}
+
+arr << Thread.new {
+  Capybara.session_name = :two
+  Session.start
+}
+
+arr << Thread.new {
+  Capybara.session_name = :three
+  Session.start
+}
+
+arr.map { |t| t.join }
