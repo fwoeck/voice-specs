@@ -1,7 +1,12 @@
+#!/usr/bin/env ruby
+
+require 'bundler'
+Bundler.setup
+
+require 'selenium-webdriver'
 require 'capybara/rspec'
 require 'capybara/dsl'
 require 'rspec'
-require 'selenium-webdriver'
 
 Capybara.run_server  = false
 Capybara.app_host    = "http://33.33.33.100:80"
