@@ -1,5 +1,9 @@
 CALL_IDS = {}
 
+def use_client(num)
+  Capybara.session_name = "client_#{num}"
+end
+
 def callid
   CALL_IDS[Capybara.session_name]
 end
