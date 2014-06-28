@@ -5,14 +5,15 @@ require './lib/helpers'
 module Session
   extend Capybara::DSL
 
-  def self.start
-    visit '/'
+  def self.start(n)
+    use_client(n)
+    visit_home_url
     sleep 2
     get_audio_access
     register_as(101)
     sleep 2
     call('000')
-    sleep 1
+    sleep 2
     get_callid
     sleep 6
     send_dtmf(1)
@@ -28,8 +29,7 @@ count   = 1
 
 (1..count).each do |n|
   threads << Thread.new {
-    use_client(n)
-    Session.start
+    Session.start(n)
   }
 end
 

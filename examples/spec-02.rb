@@ -7,14 +7,14 @@ module Session
 
   def self.start
     use_client(1)
-    visit '/'
+    visit_home_url
     sleep 2
     get_audio_access
     register_as(101)
     sleep 2
 
     use_client(2)
-    visit '/'
+    visit_home_url
     sleep 2
     get_audio_access
     register_as(102)

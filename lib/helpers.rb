@@ -1,5 +1,10 @@
 CALL_IDS = {}
 
+def visit_home_url
+  visit '/'
+  resize_browser(800, 600)
+end
+
 def use_client(num)
   Capybara.session_name = "client_#{num}"
 end
@@ -44,4 +49,9 @@ end
 def hangup_call
   puts "#{Capybara.session_name}: Hangup #{callid}"
   page.execute_script "phone.app.hangup('#{callid}')"
+end
+
+def resize_browser(width, height)
+  window = Capybara.current_session.driver.browser.manage.window
+  window.resize_to(width, height)
 end
