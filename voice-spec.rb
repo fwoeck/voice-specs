@@ -8,8 +8,8 @@ require 'capybara/rspec'
 require 'capybara/dsl'
 require 'rspec'
 
+Capybara.app_host    = 'http://33.33.33.100'
 Capybara.run_server  = false
-Capybara.app_host    = "http://33.33.33.100:80"
 Capybara.server_port = 80
 
 Capybara.register_driver :selenium_firefox_driver do |app|
@@ -40,21 +40,14 @@ module Session
   end
 end
 
-arr = []
+threads = []
+count   = 1
 
-arr << Thread.new {
-  Capybara.session_name = :one
-  Session.start
-}
+(1..count).each do |n|
+  threads << Thread.new {
+    Capybara.session_name = "session_#{n}"
+    Session.start
+  }
+end
 
-arr << Thread.new {
-  Capybara.session_name = :two
-  Session.start
-}
-
-arr << Thread.new {
-  Capybara.session_name = :three
-  Session.start
-}
-
-arr.map { |t| t.join }
+threads.map { |t| t.join }
