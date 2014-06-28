@@ -1,11 +1,5 @@
 #!/usr/bin/env ruby
 
-# Launch this from your physical host (audio device & firefox needed):
-# > examples/spec-01.rb
-#
-# You can spawn multiple browsers at once:
-# > examples/spec-01.rb 1 & examples/spec-01.rb 2 & examples/spec-01.rb 3 &
-#
 require './lib/setup'
 require './lib/helpers'
 
