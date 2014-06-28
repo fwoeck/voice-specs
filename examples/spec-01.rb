@@ -22,7 +22,8 @@ module Session
     send_dtmf(1)
     sleep 10
     send_dtmf(2)
-    sleep 5
+    sleep 10
+    hangup_call
   end
 end
 
