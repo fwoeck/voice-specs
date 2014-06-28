@@ -1,12 +1,21 @@
 #!/usr/bin/env ruby
+
+# Launch this from your physical host (audio device & firefox needed):
+# > examples/spec-01.rb
+#
+# You can spawn multiple browsers at once:
+# > examples/spec-01.rb 1 & examples/spec-01.rb 2 & examples/spec-01.rb 3 &
+#
 require './lib/setup'
 require './lib/helpers'
+
+NUM = ARGV[0] || 1
 
 module Session
   extend Capybara::DSL
 
-  def self.start(n)
-    use_client(n)
+  def self.start
+    use_client(NUM)
     visit_home_url
     sleep 2
     get_audio_access
@@ -23,14 +32,4 @@ module Session
   end
 end
 
-# count > 1 causes havoc with the FF audio device:
-threads = []
-count   = 1
-
-(1..count).each do |n|
-  threads << Thread.new {
-    Session.start(n)
-  }
-end
-
-threads.map { |t| t.join }
+Session.start
