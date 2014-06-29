@@ -3,6 +3,10 @@
 # Launch this from a vnc-session or your physical host:
 # > ./spawn_spec 01
 #
+# Currently, AHN will call to the extensions 102/103 after
+# transitioning the IVR menu. If you register your softphone
+# for these SIP users, it will receive the calls.
+#
 # You can spawn multiple firefox browsers at once:
 # > ./spawn_spec 01 3
 
