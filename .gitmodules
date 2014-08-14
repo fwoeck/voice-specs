@@ -1,0 +1,3 @@
+[submodule "sippy_cup"]
+	path = sippy_cup
+	url = git@github.com:fwoeck/sippy_cup.git
