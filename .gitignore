@@ -1,4 +1,5 @@
 /vendor/bundle
+/.ruby-version
 /log/*.log
 /.bundle/*
 /config/*
