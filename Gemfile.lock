@@ -24,8 +24,11 @@ GEM
       xpath (~> 2.0)
     childprocess (0.5.5)
       ffi (~> 1.0, >= 1.0.11)
+    colorize (0.7.3)
     diff-lcs (1.2.5)
     ffi (1.9.6)
+    git-smart (0.1.10)
+      colorize
     i18n (0.6.11)
     json (1.8.1)
     mime-types (2.4.1)
@@ -69,6 +72,7 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
+  git-smart
   rspec
   selenium-webdriver
   sippy_cup!
