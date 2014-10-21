@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Launch this from a vnc-session or your physical host:
-# > ./scripts/spawn-spec 01
+# > ./script/spawn-spec 01
 #
 # You can spawn multiple firefox browsers at once:
-# > ./scripts/spawn-spec 01 3
+# > ./script/spawn-spec 01 3
 
 num=$1
 if [ -z "$num" ]; then

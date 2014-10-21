@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require 'bundler'
+Bundler.setup
+
+require 'yaml'
+require 'bunny'
+require 'digest'
+require 'active_support/all'
+SpecConfig = YAML.load_file('./config/app.yml')
+
+require './lib/call'
+require './lib/agent'
+require './lib/yml_player'
+require './lib/amqp_manager'
+require './lib/redis_connection'
+
+AmqpManager.start
+YmlPlayer.new.start
