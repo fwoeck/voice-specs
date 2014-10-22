@@ -4,3 +4,4 @@
 /log/*.yml
 /.bundle/*
 /config/*
+/tags
