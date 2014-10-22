@@ -1,5 +1,5 @@
 class YmlPlayer
-  attr_reader :log, :tn, :tm, :t0, :dt
+  attr_reader :log, :tn, :tm, :t0, :dt, :obj, :dump
 
 
   def initialize(filename='./fixtures/successful-call.yml')
@@ -13,51 +13,49 @@ class YmlPlayer
   end
 
 
-  def rewrite_history_for_call(lo)
-    lo.data.tap { |d|
-      d.origin_id = d.origin_id.sub(/[^-]+$/, tm) if d.origin_id
-
-      [:called_at, :queued_at, :hungup_at, :dispatched_at
-      ].each { |sym|
-        d.send("#{sym}=", d.send(sym) + dt) if d.send(sym)
-      }
-    }
+  def rewrite_call_id
+    return unless obj.call_id
+    obj.call_id = obj.call_id.sub(/[^-]+$/, tm)
   end
 
 
-  def update_redis_for_agent(lo)
-    RPool.with { |con|
-      con.set(lo.data.activity_keyname, lo.data.activity, {ex: 1.week})
-    }
+  def interpolate_current_data(lo)
+    @obj = lo.data
+
+    rewrite_call_id
+    obj.rewrite_history(tm, dt) if obj.is_a?(Call)
   end
 
 
-  def update_redis_for_call(lo, dump)
-    RPool.with { |con|
-      con.set(lo.data.call_keyname, dump, {ex: 10.minutes})
-    }
+  def store_object_in_redis
+    @dump = Marshal.dump(obj)
+
+    obj.store_activity   if obj.is_a?(Agent)
+    obj.store_dump(dump) if obj.is_a?(Call)
   end
 
 
-  def rewrite_call_id_for(lo)
-    return unless lo.data.call_id
-    lo.data.call_id = lo.data.call_id.sub(/[^-]+$/, tm)
+  def replay_capture_data
+    log.each_with_index { |lo, idx|
+      interpolate_current_data(lo)
+      sleep 0.01 while lo.time + dt > Time.now
+
+      store_object_in_redis
+      AmqpManager.publish(dump, lo.custom, lo.numbers)
+      puts "Replay message #{idx + 1}/#{log.size}"
+    }
   end
 
 
   def start
-    log.each_with_index { |lo, idx|
-      sleep 0.01 while lo.time + dt > Time.now
-
-      rewrite_call_id_for(lo)
-      rewrite_history_for_call(lo) if lo.data.is_a?(Call)
-      update_redis_for_agent(lo)   if lo.data.is_a?(Agent)
-
-      dump = Marshal.dump(lo.data)
-      update_redis_for_call(lo, dump) if lo.data.is_a?(Call)
-
-      AmqpManager.publish(dump, lo.custom, lo.numbers)
-      puts "Replay message #{idx + 1}/#{log.size}"
-    }
+    Agent.with_agent do |agent|
+      if agent
+        puts "Checkout agent ##{agent.id}"
+        replay_capture_data
+        puts "Checkin agent ##{agent.id}"
+      else
+        # TODO playback rejection
+      end
+    end
   end
 end
