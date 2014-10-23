@@ -13,17 +13,13 @@ class YmlPlayer
   end
 
 
-  # TODO Set skill according to current agent
-  #
-  def skill
-    @memo_skill ||= SpecConfig['skills'].keys.sample
+  def skill_for(agent)
+    @memo_skill ||= agent.skills.sample
   end
 
 
-  # TODO Set lang according to current agent
-  #
-  def lang
-    @memo_lang ||= SpecConfig['languages'].keys.sample
+  def lang_for(agent)
+    @memo_lang ||= agent.languages.sample
   end
 
 
@@ -33,7 +29,7 @@ class YmlPlayer
 
     if obj.is_a?(Call)
       obj.rewrite_timestamps(tm, dt)
-      obj.rewrite_menu_choice(lang, skill)
+      obj.rewrite_menu_choice lang_for(agent), skill_for(agent)
     end
   end
 

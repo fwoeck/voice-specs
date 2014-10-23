@@ -3,13 +3,23 @@ class Agent
   AdminName  = '999' #
   AgentMutex =  Mutex.new
 
-  attr_accessor :id, :name, :languages, :skills, :activity, :visibility, :call_id,
-                :locked, :availability, :idle_since, :mutex, :unlock_scheduled
+  attr_accessor :id, :name, :activity, :visibility, :call_id, :availability
+  attr_writer   :languages, :skills
 
 
   def initialize(_id, _name)
     @id   = _id
     @name = _name
+  end
+
+
+  def languages
+    RPool.with { |con| con.smembers(language_keyname) }
+  end
+
+
+  def skills
+    RPool.with { |con| con.smembers(skill_keyname) }
   end
 
 
@@ -75,6 +85,17 @@ class Agent
 
 
   private
+
+
+  def language_keyname
+    "#{SpecConfig['rails_env']}.languages.#{self.id}"
+  end
+
+
+  def skill_keyname
+    "#{SpecConfig['rails_env']}.skills.#{self.id}"
+  end
+
 
   def activity_keyname
     "#{SpecConfig['rails_env']}.activity.#{self.id}"
