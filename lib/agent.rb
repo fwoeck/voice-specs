@@ -1,6 +1,7 @@
 class Agent
-  RecordedName = '101' # Original extension from yml recording
-  AgentMutex   = Mutex.new
+  AgentName  = '101' # Original extensions from yml recording
+  AdminName  = '999' #
+  AgentMutex =  Mutex.new
 
   attr_accessor :id, :name, :languages, :skills, :activity, :visibility, :call_id,
                 :locked, :availability, :idle_since, :mutex, :unlock_scheduled
@@ -27,7 +28,7 @@ class Agent
 
 
   def rewrite_extensions(agent)
-    return if name == SpecConfig['admin_name']
+    return if name == AdminName
 
     self.id   = agent.id
     self.name = agent.name

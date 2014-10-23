@@ -36,9 +36,9 @@ class Call
   end
 
 
-  def rewrite_menu_choice(lang, skill)
-    self.language = lang
-    self.skill    = skill
+  def rewrite_menu_choice(_lang, _skill)
+    self.language = _lang  if language
+    self.skill    = _skill if skill
   end
 
 
@@ -59,7 +59,7 @@ class Call
   def interpolate_names_for(field, agent)
     return unless field
 
-    field.sub(SpecConfig['admin_name'], '03022446688')
-         .sub(Agent::RecordedName, agent.name)
+    field.sub(Agent::AdminName, '03022446688')
+         .sub(Agent::AgentName, agent.name)
   end
 end
