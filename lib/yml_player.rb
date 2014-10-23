@@ -19,11 +19,12 @@ class YmlPlayer
   end
 
 
-  def interpolate_current_data(lo)
+  def interpolate_current_data(lo, agent)
     @obj = lo.data
 
     rewrite_call_id
-    obj.rewrite_history(tm, dt) if obj.is_a?(Call)
+    obj.rewrite_extensions(agent)
+    obj.rewrite_timestamps(tm, dt) if obj.is_a?(Call)
   end
 
 
@@ -35,27 +36,27 @@ class YmlPlayer
   end
 
 
-  def replay_capture_data
+  def replay_capture_data_with(agent)
     log.each_with_index { |lo, idx|
-      interpolate_current_data(lo)
+      interpolate_current_data(lo, agent)
       sleep 0.01 while lo.time + dt > Time.now
 
       store_object_in_redis
       AmqpManager.publish(dump, lo.custom, lo.numbers)
-      puts "Replay message #{idx + 1}/#{log.size}"
+      print "Replay message #{idx + 1}/#{log.size} for ##{agent.name}\n"
     }
   end
 
 
   def start
-    Agent.with_agent do |agent|
+    Agent.with_agent { |agent|
       if agent
-        puts "Checkout agent ##{agent.id}"
-        replay_capture_data
-        puts "Checkin agent ##{agent.id}"
+        print "Checkout agent ##{agent.name}\n"
+        replay_capture_data_with(agent)
+        print "Checkin agent ##{agent.name}\n"
       else
         # TODO playback rejection
       end
-    end
+    }
   end
 end

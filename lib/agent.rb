@@ -1,6 +1,6 @@
-AgentMutex = Mutex.new
-
 class Agent
+  RecordedName = '101' # Original extension from yml recording
+  AgentMutex   = Mutex.new
 
   attr_accessor :id, :name, :languages, :skills, :activity, :visibility, :call_id,
                 :locked, :availability, :idle_since, :mutex, :unlock_scheduled
@@ -13,11 +13,6 @@ class Agent
   end
 
 
-  def activity_keyname
-    "#{SpecConfig['rails_env']}.activity.#{self.id}"
-  end
-
-
   def store_activity
     RPool.with { |con|
       con.set(activity_keyname, activity, {ex: 1.week})
@@ -25,16 +20,23 @@ class Agent
   end
 
 
+  def rewrite_extensions(agent)
+    self.id   = agent.id
+    self.name = agent.name
+  end
+
+
   def self.with_agent
     agent = checkout_agent
     yield agent
+  ensure
     checkin_agent(agent)
   end
 
 
   def self.checkout_agent
     AgentMutex.synchronize {
-      id   = idle_ids.sample
+      id   = (User.agent_names.keys & idle_ids).sample
       name = id ? User.agent_names[id] : nil
 
       new(id, name, 'undefined').tap { |a| a.store_activity } if id
@@ -45,10 +47,8 @@ class Agent
   def self.checkin_agent(agent)
     return unless agent
 
-    AgentMutex.synchronize {
-      agent.activity = 'silent'
-      agent.store_activity
-    }
+    agent.activity = 'silent'
+    agent.store_activity
   end
 
 
@@ -62,5 +62,12 @@ class Agent
 
   def self.activity_pattern
     "#{SpecConfig['rails_env']}.activity.*"
+  end
+
+
+  private
+
+  def activity_keyname
+    "#{SpecConfig['rails_env']}.activity.#{self.id}"
   end
 end

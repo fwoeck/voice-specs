@@ -13,11 +13,6 @@ class Call
   end
 
 
-  def call_keyname
-    "#{SpecConfig['rails_env']}.call.#{call_id}"
-  end
-
-
   def store_dump(dump)
     RPool.with { |con|
       con.set(call_keyname, dump, {ex: 10.minutes})
@@ -25,14 +20,34 @@ class Call
   end
 
 
-  def rewrite_history(tm, dt)
-    tap { |c|
-      c.origin_id = c.origin_id.sub(/[^-]+$/, tm) if c.origin_id
+  def rewrite_timestamps(tm, dt)
+    self.origin_id = origin_id.sub(/[^-]+$/, tm) if origin_id
 
-      [:called_at, :queued_at, :hungup_at, :dispatched_at
-      ].each { |sym|
-        c.send("#{sym}=", c.send(sym) + dt) if c.send(sym)
-      }
+    [:called_at, :queued_at, :hungup_at, :dispatched_at
+    ].each { |sym|
+      send("#{sym}=", send(sym) + dt) if send(sym)
     }
+  end
+
+
+  def rewrite_extensions(agent)
+    [:call_tag, :extension, :caller_id].each { |sym|
+      send "#{sym}=", interpolate_names_for(send(sym), agent)
+    }
+  end
+
+
+  private
+
+  def call_keyname
+    "#{SpecConfig['rails_env']}.call.#{call_id}"
+  end
+
+
+  def interpolate_names_for(field, agent)
+    return unless field
+
+    field.sub(SpecConfig['admin_name'], '03022446688')
+         .sub(Agent::RecordedName, agent.name)
   end
 end
