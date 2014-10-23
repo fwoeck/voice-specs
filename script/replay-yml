@@ -1,5 +1,11 @@
 #!/usr/bin/env ruby
 
+# This script simulates incoming calls by sending out some
+# pre-recorded messages that originally came from Voice-Ahn.
+#
+# Invoke it with a number of simultaneous calls:
+# > script/replay-yml 100
+
 require 'bundler'
 Bundler.setup
 

@@ -13,11 +13,15 @@ class YmlPlayer
   end
 
 
+  # TODO Set skill according to current agent
+  #
   def skill
     @memo_skill ||= SpecConfig['skills'].keys.sample
   end
 
 
+  # TODO Set lang according to current agent
+  #
   def lang
     @memo_lang ||= SpecConfig['languages'].keys.sample
   end
