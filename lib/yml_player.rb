@@ -59,4 +59,15 @@ class YmlPlayer
       end
     }
   end
+
+
+  def self.start(count=1)
+    threads = []
+
+    count.times do
+      sleep 0.1
+      threads << Thread.new { YmlPlayer.new.start }
+    end
+    threads.map(&:join)
+  end
 end
