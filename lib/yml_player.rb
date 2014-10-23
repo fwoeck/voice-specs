@@ -13,18 +13,26 @@ class YmlPlayer
   end
 
 
-  def rewrite_call_id
-    return unless obj.call_id
-    obj.call_id = obj.call_id.sub(/[^-]+$/, tm)
+  def skill
+    @memo_skill ||= SpecConfig['skills'].keys.sample
+  end
+
+
+  def lang
+    @memo_lang ||= SpecConfig['languages'].keys.sample
   end
 
 
   def interpolate_current_data(lo, agent)
     @obj = lo.data
 
-    rewrite_call_id
+    obj.rewrite_call_id(tm)
     obj.rewrite_extensions(agent)
-    obj.rewrite_timestamps(tm, dt) if obj.is_a?(Call)
+
+    if obj.is_a?(Call)
+      obj.rewrite_timestamps(tm, dt)
+      obj.rewrite_menu_choice(lang, skill)
+    end
   end
 
 
@@ -65,7 +73,7 @@ class YmlPlayer
     threads = []
 
     count.times do
-      sleep 0.1
+      sleep 0.5
       threads << Thread.new { YmlPlayer.new.start }
     end
     threads.map(&:join)

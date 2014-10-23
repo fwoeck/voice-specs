@@ -20,6 +20,12 @@ class Call
   end
 
 
+  def rewrite_call_id(tm)
+    return unless call_id
+    self.call_id = call_id.sub(/[^-]+$/, tm)
+  end
+
+
   def rewrite_timestamps(tm, dt)
     self.origin_id = origin_id.sub(/[^-]+$/, tm) if origin_id
 
@@ -27,6 +33,12 @@ class Call
     ].each { |sym|
       send("#{sym}=", send(sym) + dt) if send(sym)
     }
+  end
+
+
+  def rewrite_menu_choice(lang, skill)
+    self.language = lang
+    self.skill    = skill
   end
 
 

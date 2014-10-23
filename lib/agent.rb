@@ -20,6 +20,12 @@ class Agent
   end
 
 
+  def rewrite_call_id(tm)
+    return unless call_id
+    self.call_id = call_id.sub(/[^-]+$/, tm)
+  end
+
+
   def rewrite_extensions(agent)
     self.id   = agent.id
     self.name = agent.name
