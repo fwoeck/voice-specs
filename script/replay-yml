@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+# This script simulates incoming calls by sending out
+# pre-recorded messages that originally came from Voice-Ahn.
+#
+# Invoke it with the number of calls to be made:
+# > script/replay-yml 100
+
+require 'bundler'
+Bundler.setup
+
+require 'yaml'
+require 'bunny'
+require 'digest'
+require 'active_support/all'
+
+SpecConfig = YAML.load_file('./config/app.yml')
+CallCount  = [1, (ARGV[0] || 1).to_i].max
+
+require './lib/amqp_manager'
+require './lib/connections'
+require './lib/yml_player'
+require './lib/agent'
+require './lib/call'
+require './lib/user'
+
+AmqpManager.start
+YmlPlayer.start(CallCount)

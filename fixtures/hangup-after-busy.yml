@@ -1,0 +1,188 @@
+---
+- !ruby/struct:LogObject
+  time: 2014-10-21 02:26:29.504091141 Z
+  data: "\x04\bo:\nAgent\f:\b@idi\x06:\n@nameI\"\b999\x06:\x06ET:\f@skills[\x06I\"\nother\x06;\bT:\x0F@languages[\x06I\"\aen\x06;\bT:\x10@visibility:\vonline:\x0E@activity:\ftalking:\r@call_idI\")89ce544a-b577-45fe-b016-7695c2402761\x06;\bT"
+  custom: false
+  numbers: true
+- !ruby/struct:LogObject
+  time: 2014-10-21 02:26:29.508396228 Z
+  data: !binary |-
+    BAhvOglDYWxsEjoNQGNhbGxfaWRJIik4OWNlNTQ0YS1iNTc3LTQ1ZmUtYjAx
+    Ni03Njk1YzI0MDI3NjEGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZDA6
+    DkBsYW5ndWFnZTA6C0Bza2lsbDA6D0BleHRlbnNpb25JIgYwBjsHVDoPQGNh
+    bGxlcl9pZEkiCDk5OQY7B1Q6DEBodW5ndXAwOg9AY2FsbGVkX2F0SXU6CVRp
+    bWUNoqYcwEto12kJOg1uYW5vX251bWkCfQI6DW5hbm9fZGVuaQY6DXN1Ym1p
+    Y3JvIgdjcDoJem9uZUkiCFVUQwY7B1Q6DUBtYWlsYm94MDoPQHF1ZXVlZF9h
+    dDA6D0BodW5ndXBfYXQwOhNAZGlzcGF0Y2hlZF9hdDA=
+  custom: false
+  numbers: true
+- !ruby/struct:LogObject
+  time: 2014-10-21 02:26:34.764491613 Z
+  data: !binary |-
+    BAhvOglDYWxsEjoNQGNhbGxfaWRJIik4OWNlNTQ0YS1iNTc3LTQ1ZmUtYjAx
+    Ni03Njk1YzI0MDI3NjEGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZDA6
+    DkBsYW5ndWFnZUkiB2RlBjsHVDoLQHNraWxsMDoPQGV4dGVuc2lvbkkiBjAG
+    OwdUOg9AY2FsbGVyX2lkSSIIOTk5BjsHVDoMQGh1bmd1cDA6D0BjYWxsZWRf
+    YXRJdToJVGltZQ2iphzAS2jXaQk6DW5hbm9fbnVtaQJ9AjoNbmFub19kZW5p
+    BjoNc3VibWljcm8iB2NwOgl6b25lSSIIVVRDBjsHVDoNQG1haWxib3gwOg9A
+    cXVldWVkX2F0MDoPQGh1bmd1cF9hdDA6E0BkaXNwYXRjaGVkX2F0MA==
+  custom: false
+  numbers: true
+- !ruby/struct:LogObject
+  time: 2014-10-21 02:26:45.256600662 Z
+  data: !binary |-
+    BAhvOglDYWxsEjoNQGNhbGxfaWRJIik4OWNlNTQ0YS1iNTc3LTQ1ZmUtYjAx
+    Ni03Njk1YzI0MDI3NjEGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZDA6
+    DkBsYW5ndWFnZUkiB2RlBjsHVDoLQHNraWxsSSIKb3RoZXIGOwdUOg9AZXh0
+    ZW5zaW9uSSIGMAY7B1Q6D0BjYWxsZXJfaWRJIgg5OTkGOwdUOgxAaHVuZ3Vw
+    MDoPQGNhbGxlZF9hdEl1OglUaW1lDaKmHMBLaNdpCToNbmFub19udW1pAn0C
+    Og1uYW5vX2RlbmkGOg1zdWJtaWNybyIHY3A6CXpvbmVJIghVVEMGOwdUOg1A
+    bWFpbGJveDA6D0BxdWV1ZWRfYXQwOg9AaHVuZ3VwX2F0MDoTQGRpc3BhdGNo
+    ZWRfYXQw
+  custom: false
+  numbers: true
+- !ruby/struct:LogObject
+  time: 2014-10-21 02:26:49.671626654 Z
+  data: !binary |-
+    BAhvOglDYWxsEjoNQGNhbGxfaWRJIik4OWNlNTQ0YS1iNTc3LTQ1ZmUtYjAx
+    Ni03Njk1YzI0MDI3NjEGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZDA6
+    DkBsYW5ndWFnZUkiB2RlBjsHVDoLQHNraWxsSSIKb3RoZXIGOwdUOg9AZXh0
+    ZW5zaW9uSSIGMAY7B1Q6D0BjYWxsZXJfaWRJIgg5OTkGOwdUOgxAaHVuZ3Vw
+    MDoPQGNhbGxlZF9hdEl1OglUaW1lDaKmHMBLaNdpCToNbmFub19udW1pAn0C
+    Og1uYW5vX2RlbmkGOg1zdWJtaWNybyIHY3A6CXpvbmVJIghVVEMGOwdUOg1A
+    bWFpbGJveDA6D0BxdWV1ZWRfYXRJdTsQDaKmHMAPLBprCTsRaQIAATsSaQY7
+    EyIHJWA7FEkiCFVUQwY7B1Q6D0BodW5ndXBfYXQwOhNAZGlzcGF0Y2hlZF9h
+    dDA=
+  custom: false
+  numbers: true
+- !ruby/struct:LogObject
+  time: 2014-10-21 02:26:50.576701732 Z
+  data: !binary |-
+    BAhvOglDYWxsEjoNQGNhbGxfaWRJIik0NjA2YmEwNS0xMTUxLTQ1MjUtYTMy
+    ZS1iNTBhN2I3OWIxMjkGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZEki
+    KTg5Y2U1NDRhLWI1NzctNDVmZS1iMDE2LTc2OTVjMjQwMjc2MQY7B1Q6DkBs
+    YW5ndWFnZUkiB2RlBjsHVDoLQHNraWxsSSIKb3RoZXIGOwdUOg9AZXh0ZW5z
+    aW9uSSIIMTAxBjsHVDoPQGNhbGxlcl9pZEkiCDk5OQY7B1Q6DEBodW5ndXAw
+    Og9AY2FsbGVkX2F0SXU6CVRpbWUNoqYcwIe3KGsJOg1uYW5vX251bWkCwgM6
+    DW5hbm9fZGVuaQY6DXN1Ym1pY3JvIgeWIDoJem9uZUkiCFVUQwY7B1Q6DUBt
+    YWlsYm94MDoPQHF1ZXVlZF9hdDA6D0BodW5ndXBfYXQwOhNAZGlzcGF0Y2hl
+    ZF9hdDA=
+  custom: false
+  numbers: true
+- !ruby/struct:LogObject
+  time: 2014-10-21 02:26:50.580284510 Z
+  data: "\x04\bo:\nAgent\f:\b@idi\a:\n@nameI\"\b101\x06:\x06ET:\f@skills[\tI\"\x10ext_booking\x06;\bTI\"\x10new_booking\x06;\bTI\"\nother\x06;\bTI\"\fpayment\x06;\bT:\x0F@languages[\nI\"\ade\x06;\bTI\"\aen\x06;\bTI\"\aes\x06;\bTI\"\afr\x06;\bTI\"\ait\x06;\bT:\x10@visibility:\vonline:\x0E@activity:\fringing:\r@call_idI\")4606ba05-1151-4525-a32e-b50a7b79b129\x06;\bT"
+  custom: true
+  numbers: false
+- !ruby/struct:LogObject
+  time: 2014-10-21 02:26:52.221142274 Z
+  data: "\x04\bo:\nAgent\f:\b@idi\a:\n@nameI\"\b101\x06:\x06ET:\f@skills[\tI\"\x10ext_booking\x06;\bTI\"\x10new_booking\x06;\bTI\"\nother\x06;\bTI\"\fpayment\x06;\bT:\x0F@languages[\nI\"\ade\x06;\bTI\"\aen\x06;\bTI\"\aes\x06;\bTI\"\afr\x06;\bTI\"\ait\x06;\bT:\x10@visibility:\vonline:\x0E@activity:\vsilent:\r@call_idI\")4606ba05-1151-4525-a32e-b50a7b79b129\x06;\bT"
+  custom: false
+  numbers: false
+- !ruby/struct:LogObject
+  time: 2014-10-21 02:26:52.222714705 Z
+  data: !binary |-
+    BAhvOglDYWxsEjoNQGNhbGxfaWRJIik0NjA2YmEwNS0xMTUxLTQ1MjUtYTMy
+    ZS1iNTBhN2I3OWIxMjkGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZEki
+    KTg5Y2U1NDRhLWI1NzctNDVmZS1iMDE2LTc2OTVjMjQwMjc2MQY7B1Q6DkBs
+    YW5ndWFnZUkiB2RlBjsHVDoLQHNraWxsSSIKb3RoZXIGOwdUOg9AZXh0ZW5z
+    aW9uSSIIMTAxBjsHVDoPQGNhbGxlcl9pZEkiCDk5OQY7B1Q6DEBodW5ndXBU
+    Og9AY2FsbGVkX2F0SXU6CVRpbWUNoqYcwIe3KGsJOg1uYW5vX251bWkCwgM6
+    DW5hbm9fZGVuaQY6DXN1Ym1pY3JvIgeWIDoJem9uZUkiCFVUQwY7B1Q6DUBt
+    YWlsYm94MDoPQHF1ZXVlZF9hdDA6D0BodW5ndXBfYXRJdTsQDaKmHMBHHkNr
+    CTsRaQJdAjsSaQY7EyIHYFA7FEkiCFVUQwY7B1Q6E0BkaXNwYXRjaGVkX2F0
+    MA==
+  custom: false
+  numbers: true
+- !ruby/struct:LogObject
+  time: 2014-10-21 02:26:53.615317405 Z
+  data: !binary |-
+    BAhvOglDYWxsEjoNQGNhbGxfaWRJIik5YjEyYjRlMy02YzExLTQxYjItYTJi
+    Ny0yZmQ3MmYwMzhkMjkGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZDA6
+    DkBsYW5ndWFnZTA6C0Bza2lsbDA6D0BleHRlbnNpb25JIggxMDEGOwdUOg9A
+    Y2FsbGVyX2lkSSIIOTk5BjsHVDoMQGh1bmd1cDA6D0BjYWxsZWRfYXRJdToJ
+    VGltZQ2iphzAHFlZawk6DW5hbm9fbnVtaQHWOg1uYW5vX2RlbmkGOg1zdWJt
+    aWNybyIHIUA6CXpvbmVJIghVVEMGOwdUOg1AbWFpbGJveDA6D0BxdWV1ZWRf
+    YXQwOg9AaHVuZ3VwX2F0MDoTQGRpc3BhdGNoZWRfYXQw
+  custom: false
+  numbers: true
+- !ruby/struct:LogObject
+  time: 2014-10-21 02:26:53.621330316 Z
+  data: "\x04\bo:\nAgent\f:\b@idi\a:\n@nameI\"\b101\x06:\x06ET:\f@skills[\tI\"\x10ext_booking\x06;\bTI\"\x10new_booking\x06;\bTI\"\nother\x06;\bTI\"\fpayment\x06;\bT:\x0F@languages[\nI\"\ade\x06;\bTI\"\aen\x06;\bTI\"\aes\x06;\bTI\"\afr\x06;\bTI\"\ait\x06;\bT:\x10@visibility:\vonline:\x0E@activity:\fringing:\r@call_idI\")9b12b4e3-6c11-41b2-a2b7-2fd72f038d29\x06;\bT"
+  custom: true
+  numbers: false
+- !ruby/struct:LogObject
+  time: 2014-10-21 02:26:55.430337147 Z
+  data: "\x04\bo:\nAgent\f:\b@idi\a:\n@nameI\"\b101\x06:\x06ET:\f@skills[\tI\"\x10ext_booking\x06;\bTI\"\x10new_booking\x06;\bTI\"\nother\x06;\bTI\"\fpayment\x06;\bT:\x0F@languages[\nI\"\ade\x06;\bTI\"\aen\x06;\bTI\"\aes\x06;\bTI\"\afr\x06;\bTI\"\ait\x06;\bT:\x10@visibility:\vonline:\x0E@activity:\vsilent:\r@call_id0"
+  custom: false
+  numbers: false
+- !ruby/struct:LogObject
+  time: 2014-10-21 02:26:55.434548714 Z
+  data: !binary |-
+    BAhvOglDYWxsEjoNQGNhbGxfaWRJIik5YjEyYjRlMy02YzExLTQxYjItYTJi
+    Ny0yZmQ3MmYwMzhkMjkGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZDA6
+    DkBsYW5ndWFnZTA6C0Bza2lsbDA6D0BleHRlbnNpb25JIggxMDEGOwdUOg9A
+    Y2FsbGVyX2lkSSIIOTk5BjsHVDoMQGh1bmd1cFQ6D0BjYWxsZWRfYXRJdToJ
+    VGltZQ2iphzAHFlZawk6DW5hbm9fbnVtaQHWOg1uYW5vX2RlbmkGOg1zdWJt
+    aWNybyIHIUA6CXpvbmVJIghVVEMGOwdUOg1AbWFpbGJveDA6D0BxdWV1ZWRf
+    YXQwOg9AaHVuZ3VwX2F0SXU7EA2iphzA+412awk7EWkCBgE7EmkGOxMiByYg
+    OxRJIghVVEMGOwdUOhNAZGlzcGF0Y2hlZF9hdDA=
+  custom: false
+  numbers: true
+- !ruby/struct:LogObject
+  time: 2014-10-21 02:26:58.675689132 Z
+  data: "\x04\bo:\nAgent\f:\b@idi\a:\n@nameI\"\b101\x06:\x06ET:\f@skills[\tI\"\x10ext_booking\x06;\bTI\"\x10new_booking\x06;\bTI\"\nother\x06;\bTI\"\fpayment\x06;\bT:\x0F@languages[\nI\"\ade\x06;\bTI\"\aen\x06;\bTI\"\aes\x06;\bTI\"\afr\x06;\bTI\"\ait\x06;\bT:\x10@visibility:\vonline:\x0E@activity:\fringing:\r@call_idI\")720e51ca-2d09-40ad-84fb-6794015ce3c2\x06;\bT"
+  custom: true
+  numbers: false
+- !ruby/struct:LogObject
+  time: 2014-10-21 02:26:58.676624214 Z
+  data: !binary |-
+    BAhvOglDYWxsEjoNQGNhbGxfaWRJIik3MjBlNTFjYS0yZDA5LTQwYWQtODRm
+    Yi02Nzk0MDE1Y2UzYzIGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZEki
+    KTg5Y2U1NDRhLWI1NzctNDVmZS1iMDE2LTc2OTVjMjQwMjc2MQY7B1Q6DkBs
+    YW5ndWFnZUkiB2RlBjsHVDoLQHNraWxsSSIKb3RoZXIGOwdUOg9AZXh0ZW5z
+    aW9uSSIIMTAxBjsHVDoPQGNhbGxlcl9pZEkiCDk5OQY7B1Q6DEBodW5ndXAw
+    Og9AY2FsbGVkX2F0SXU6CVRpbWUNoqYcwDNAqmsJOg1uYW5vX251bWkBizoN
+    bmFub19kZW5pBjoNc3VibWljcm8iBxOQOgl6b25lSSIIVVRDBjsHVDoNQG1h
+    aWxib3gwOg9AcXVldWVkX2F0MDoPQGh1bmd1cF9hdDA6E0BkaXNwYXRjaGVk
+    X2F0MA==
+  custom: false
+  numbers: true
+- !ruby/struct:LogObject
+  time: 2014-10-21 02:27:00.129449085 Z
+  data: "\x04\bo:\nAgent\f:\b@idi\x06:\n@nameI\"\b999\x06:\x06ET:\f@skills[\x06I\"\nother\x06;\bT:\x0F@languages[\x06I\"\aen\x06;\bT:\x10@visibility:\vonline:\x0E@activity:\vsilent:\r@call_idI\")89ce544a-b577-45fe-b016-7695c2402761\x06;\bT"
+  custom: false
+  numbers: false
+- !ruby/struct:LogObject
+  time: 2014-10-21 02:27:00.137128937 Z
+  data: !binary |-
+    BAhvOglDYWxsEjoNQGNhbGxfaWRJIik4OWNlNTQ0YS1iNTc3LTQ1ZmUtYjAx
+    Ni03Njk1YzI0MDI3NjEGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZDA6
+    DkBsYW5ndWFnZUkiB2RlBjsHVDoLQHNraWxsSSIKb3RoZXIGOwdUOg9AZXh0
+    ZW5zaW9uSSIGMAY7B1Q6D0BjYWxsZXJfaWRJIgg5OTkGOwdUOgxAaHVuZ3Vw
+    VDoPQGNhbGxlZF9hdEl1OglUaW1lDaKmHMBLaNdpCToNbmFub19udW1pAn0C
+    Og1uYW5vX2RlbmkGOg1zdWJtaWNybyIHY3A6CXpvbmVJIghVVEMGOwdUOg1A
+    bWFpbGJveDA6D0BxdWV1ZWRfYXRJdTsQDaKmHMAPLBprCTsRaQIAATsSaQY7
+    EyIHJWA7FEkiCFVUQwY7B1Q6D0BodW5ndXBfYXRJdTsQDaKmHMBj4QFsCTsR
+    aVE7EmkGOxMiBwdgOxRJIghVVEMGOwdUOhNAZGlzcGF0Y2hlZF9hdDA=
+  custom: false
+  numbers: true
+- !ruby/struct:LogObject
+  time: 2014-10-21 02:27:00.169462670 Z
+  data: "\x04\bo:\nAgent\f:\b@idi\a:\n@nameI\"\b101\x06:\x06ET:\f@skills[\tI\"\x10ext_booking\x06;\bTI\"\x10new_booking\x06;\bTI\"\nother\x06;\bTI\"\fpayment\x06;\bT:\x0F@languages[\nI\"\ade\x06;\bTI\"\aen\x06;\bTI\"\aes\x06;\bTI\"\afr\x06;\bTI\"\ait\x06;\bT:\x10@visibility:\vonline:\x0E@activity:\vsilent:\r@call_idI\")720e51ca-2d09-40ad-84fb-6794015ce3c2\x06;\bT"
+  custom: false
+  numbers: false
+- !ruby/struct:LogObject
+  time: 2014-10-21 02:27:00.170844590 Z
+  data: !binary |-
+    BAhvOglDYWxsEjoNQGNhbGxfaWRJIik3MjBlNTFjYS0yZDA5LTQwYWQtODRm
+    Yi02Nzk0MDE1Y2UzYzIGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZEki
+    KTg5Y2U1NDRhLWI1NzctNDVmZS1iMDE2LTc2OTVjMjQwMjc2MQY7B1Q6DkBs
+    YW5ndWFnZUkiB2RlBjsHVDoLQHNraWxsSSIKb3RoZXIGOwdUOg9AZXh0ZW5z
+    aW9uSSIIMTAxBjsHVDoPQGNhbGxlcl9pZEkiCDk5OQY7B1Q6DEBodW5ndXBU
+    Og9AY2FsbGVkX2F0SXU6CVRpbWUNoqYcwDNAqmsJOg1uYW5vX251bWkBizoN
+    bmFub19kZW5pBjoNc3VibWljcm8iBxOQOgl6b25lSSIIVVRDBjsHVDoNQG1h
+    aWxib3gwOg9AcXVldWVkX2F0MDoPQGh1bmd1cF9hdEl1OxANoqYcwAmGAmwJ
+    OxFpAmgBOxJpBjsTIgY2OxRJIghVVEMGOwdUOhNAZGlzcGF0Y2hlZF9hdDA=
+  custom: false
+  numbers: true

@@ -1,11 +1,12 @@
 #!/usr/bin/env ruby
+
 require 'bundler'
 Bundler.setup
 
 require 'sippy_cup'
 require 'yaml'
 
-conf      = YAML.load_file('./config/app.yml')
+conf      = YAML.load_file('./config/load.yml')
 index     = 0
 numbers   = ['1', '2', '3', '4', '2'].cycle
 scenarios = []
