@@ -62,13 +62,9 @@ class YmlPlayer
 
   def start
     Agent.with_agent { |agent|
-      if agent
-        print "Checkout agent ##{agent.name}\n"
-        replay_capture_data_with(agent)
-        print "Checkin agent ##{agent.name}\n"
-      else
-        # TODO playback rejection
-      end
+      print "Checkout agent ##{agent.name}\n"
+      replay_capture_data_with(agent)
+      print "Checkin agent ##{agent.name}\n"
     }
   end
 
@@ -77,7 +73,7 @@ class YmlPlayer
     threads = []
 
     count.times do
-      sleep 0.5
+      sleep rand(10)
       threads << Thread.new { YmlPlayer.new.start }
     end
     threads.map(&:join)

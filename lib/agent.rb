@@ -27,13 +27,15 @@ class Agent
 
 
   def rewrite_extensions(agent)
+    return if name == SpecConfig['admin_name']
+
     self.id   = agent.id
     self.name = agent.name
   end
 
 
   def self.with_agent
-    agent = checkout_agent
+    sleep 1 while !(agent = checkout_agent)
     yield agent
   ensure
     checkin_agent(agent)
