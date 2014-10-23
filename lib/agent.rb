@@ -7,10 +7,9 @@ class Agent
                 :locked, :availability, :idle_since, :mutex, :unlock_scheduled
 
 
-  def initialize(_id, _name, _activity)
-    @id       = _id
-    @name     = _name
-    @activity = _activity
+  def initialize(_id, _name)
+    @id   = _id
+    @name = _name
   end
 
 
@@ -45,10 +44,10 @@ class Agent
 
   def self.checkout_agent
     AgentMutex.synchronize {
-      id   = (User.agent_names.keys & idle_ids).sample
-      name = id ? User.agent_names[id] : nil
+      id   = User.agent_names.keys.sample
+      name = id ? User.agent_names.delete(id) : nil
 
-      new(id, name, 'undefined').tap { |a| a.store_activity } if id
+      new(id, name) if id
     }
   end
 
@@ -56,8 +55,9 @@ class Agent
   def self.checkin_agent(agent)
     return unless agent
 
-    agent.activity = 'silent'
-    agent.store_activity
+    AgentMutex.synchronize {
+      User.agent_names[agent.id] = agent.name
+    }
   end
 
 
