@@ -76,8 +76,9 @@ class YmlPlayer
   def self.start(count=1)
     threads = []
 
-    count.times do
-      sleep rand(10)
+    count.times do |idx|
+      sleep rand(4)
+      print "Start call ##{idx+1}\n"
       threads << Thread.new { YmlPlayer.new.start }
     end
     threads.map(&:join)
