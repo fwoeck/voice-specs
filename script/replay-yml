@@ -20,6 +20,7 @@ CallCount  = [1, (ARGV[0] || 1).to_i].max
 require './lib/amqp_manager'
 require './lib/connections'
 require './lib/yml_player'
+require './lib/customer'
 require './lib/agent'
 require './lib/call'
 require './lib/user'
