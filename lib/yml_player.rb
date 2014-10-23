@@ -23,9 +23,7 @@ class YmlPlayer
   end
 
 
-  def interpolate_current_data(lo, agent)
-    @obj = lo.data
-
+  def interpolate_current_data(agent)
     obj.rewrite_call_id(tm)
     obj.rewrite_extensions(agent)
 
@@ -44,13 +42,19 @@ class YmlPlayer
   end
 
 
+  def send_messages_for(agent, lo)
+    interpolate_current_data(agent)
+    sleep 0.01 while lo.time + dt > Time.now
+
+    store_object_in_redis
+    AmqpManager.publish(dump, lo.custom, lo.numbers)
+  end
+
+
   def replay_capture_data_with(agent)
     log.each_with_index { |lo, idx|
-      interpolate_current_data(lo, agent)
-      sleep 0.01 while lo.time + dt > Time.now
-
-      store_object_in_redis
-      AmqpManager.publish(dump, lo.custom, lo.numbers)
+      @obj = lo.data
+      send_messages_for(agent, lo)
       print "Replay message #{idx + 1}/#{log.size} for ##{agent.name}\n"
     }
   end
