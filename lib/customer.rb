@@ -20,7 +20,7 @@ class Customer
 
   def self.checkout_customer
     CustMutex.synchronize {
-      all_numbers.delete all_numbers.sample
+      all_caller_ids.delete all_caller_ids.sample
     }
   end
 
@@ -29,13 +29,13 @@ class Customer
     return unless cust
 
     CustMutex.synchronize {
-      all_numbers << cust
+      all_caller_ids << cust
     }
   end
 
 
-  def self.all_numbers
-    @_memo_all_numbers ||= only(:caller_ids).to_a.map(&:caller_ids)
-                          .flatten.uniq - [Agent::AdminName]
+  def self.all_caller_ids
+    @_memo_all_ids ||= only(:caller_ids).to_a.map(&:caller_ids)
+                      .flatten.uniq - [Agent::AdminName]
   end
 end
