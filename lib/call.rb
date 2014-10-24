@@ -42,9 +42,9 @@ class Call
   end
 
 
-  def rewrite_extensions(agent)
+  def rewrite_extensions(agent, cust)
     [:call_tag, :extension, :caller_id].each { |sym|
-      send "#{sym}=", interpolate_names_for(send(sym), agent)
+      send "#{sym}=", interpolate_names_for(send(sym), agent, cust)
     }
   end
 
@@ -56,10 +56,10 @@ class Call
   end
 
 
-  def interpolate_names_for(field, agent)
+  def interpolate_names_for(field, agent, cust)
     return unless field
 
-    field.sub(Agent::AdminName, '03022446688')
+    field.sub(Agent::AdminName, cust)
          .sub(Agent::AgentName, agent.name)
   end
 end

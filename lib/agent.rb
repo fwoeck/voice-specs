@@ -36,7 +36,7 @@ class Agent
   end
 
 
-  def rewrite_extensions(agent)
+  def rewrite_extensions(agent, _cust)
     return if name == AdminName
 
     self.id   = agent.id
@@ -71,21 +71,7 @@ class Agent
   end
 
 
-  def self.idle_ids
-    RPool.with { |con|
-      con.keys(activity_pattern).map { |key| con.get(key) == 'silent' && key }
-         .select { |key| key }.map { |key| key[/\d+$/].to_i }
-    }
-  end
-
-
-  def self.activity_pattern
-    "#{SpecConfig['rails_env']}.activity.*"
-  end
-
-
   private
-
 
   def language_keyname
     "#{SpecConfig['rails_env']}.languages.#{self.id}"

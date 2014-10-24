@@ -1,5 +1,5 @@
 class YmlPlayer
-  attr_reader :log, :tn, :tm, :t0, :dt, :obj, :dump
+  attr_reader :log, :tn, :tm, :t0, :dt, :obj, :dump, :agent, :cust
 
 
   def initialize(filename='./fixtures/successful-call.yml')
@@ -13,23 +13,23 @@ class YmlPlayer
   end
 
 
-  def skill_for(agent)
+  def skill
     @memo_skill ||= agent.skills.sample
   end
 
 
-  def lang_for(agent)
+  def lang
     @memo_lang ||= agent.languages.sample
   end
 
 
-  def interpolate_current_data(agent)
+  def interpolate_sample_data
     obj.rewrite_call_id(tm)
-    obj.rewrite_extensions(agent)
+    obj.rewrite_extensions(agent, cust)
 
     if obj.is_a?(Call)
       obj.rewrite_timestamps(tm, dt)
-      obj.rewrite_menu_choice lang_for(agent), skill_for(agent)
+      obj.rewrite_menu_choice(lang, skill)
     end
   end
 
@@ -42,8 +42,8 @@ class YmlPlayer
   end
 
 
-  def send_messages_for(agent, lo)
-    interpolate_current_data(agent)
+  def send_messages_for(lo)
+    interpolate_sample_data
     sleep 0.01 while lo.time + dt > Time.now
 
     store_object_in_redis
@@ -51,20 +51,25 @@ class YmlPlayer
   end
 
 
-  def replay_capture_data_with(agent)
+  def replay_capture_data
     log.each_with_index { |lo, idx|
       @obj = lo.data
-      send_messages_for(agent, lo)
-      print "Replay message #{idx + 1}/#{log.size} for ##{agent.name}\n"
+      send_messages_for(lo)
+      print "Emit message #{'%02d' % (idx+1)}/#{log.size} for ##{agent.name}\n"
     }
   end
 
 
   def start
-    Agent.with_agent { |agent|
-      print "Checkout agent ##{agent.name}\n"
-      replay_capture_data_with(agent)
-      print "Checkin agent ##{agent.name}\n"
+    Agent.with_agent { |_agent|
+      Customer.with_customer { |_cust|
+        @cust  = _cust
+        @agent = _agent
+
+        print "Replay agent ##{agent.name} with caller ##{cust}\n"
+        replay_capture_data
+        print "Finish agent ##{agent.name} with caller ##{cust}\n"
+      }
     }
   end
 
@@ -74,7 +79,7 @@ class YmlPlayer
 
     count.times do |idx|
       sleep rand(4)
-      print "Start call ##{idx+1}\n"
+      print "Start call ##{'%04d' % (idx+1)}\n"
       threads << Thread.new { YmlPlayer.new.start }
     end
     threads.map(&:join)
