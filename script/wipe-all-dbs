@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+
+require 'yaml'
+
+SpecConfig = YAML.load_file('./config/app.yml')
+MongoConf  = YAML.load_file('./config/mongoid.yml')
+
+mongodb    = MongoConf[SpecConfig['rails_env']]['sessions']['default']['database']
+el_host    = SpecConfig['elastic_host']
+el_port    = SpecConfig['elastic_port']
+mysql_db   = SpecConfig['mysql_db']
+mysql_user = SpecConfig['mysql_user']
+mysql_pass = SpecConfig['mysql_pass']
+rails_base = SpecConfig['rails_base']
+rrd_file   = SpecConfig['stats_rrd']
+key        = (0..9).to_a.sample(6).map(&:to_s).join
+
+puts "Caution! This script will:"
+puts
+puts "- wipe all databases (mongoDB, mySQL, Redis, Elasticsearch, Rrd-stats),"
+puts "- restart all Voice services."
+puts
+puts "It is necessary to run a Chef-provisioning after that."
+puts "If you really want to do that, enter #{key}."
+
+input = STDIN.gets.chomp
+if input == key
+  system "rm #{rrd_file}"
+  system "redis-cli flushall >/dev/null"
+  system "mongo #{mongodb} --eval 'db.dropDatabase();' >/dev/null"
+  system "curl -s -XDELETE 'http://#{el_host}:#{el_port}/_all/' >/dev/null"
+  system "mysql -u#{mysql_user} -p#{mysql_pass} -Nse 'show tables' #{mysql_db} | grep -v schema_migrations | while read table; do mysql -u#{mysql_user} -p#{mysql_pass} -e \"truncate table $table\" #{mysql_db}; done"
+  puts
+  system "sudo sv force-restart /etc/service/*"
+  puts
+  system "cd #{rails_base}; bundle exec rake db:mongoid:create_indexes"
+else
+  puts "Ok, exit without action."
+end

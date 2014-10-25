@@ -4,6 +4,7 @@ MESSAGE_LOG = []
 
 
 class AmqpManager
+  include Celluloid
 
   TOPICS.each { |name|
     class_eval %Q"
@@ -69,6 +70,8 @@ class AmqpManager
   class << self
 
     def start
+      Celluloid.logger = nil
+      Celluloid::Actor[:amqp] = AmqpManager.pool(size: 32)
       @@manager ||= new.tap { |m| m.start }
     end
 
@@ -80,6 +83,11 @@ class AmqpManager
 
     def publish(*args)
       @@manager.publish(*args)
+    end
+
+
+    def publish_to(*args)
+      @@manager.publish_to(*args)
     end
   end
 end

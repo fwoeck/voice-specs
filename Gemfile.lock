@@ -30,14 +30,19 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    celluloid (0.16.0)
+      timers (~> 4.0.0)
     childprocess (0.5.5)
       ffi (~> 1.0, >= 1.0.11)
     colorize (0.7.3)
     connection_pool (2.0.0)
     diff-lcs (1.2.5)
+    faker (1.4.3)
+      i18n (~> 0.5)
     ffi (1.9.6)
     git-smart (0.1.10)
       colorize
+    hitimes (1.2.2)
     i18n (0.6.11)
     json (1.8.1)
     mime-types (2.4.3)
@@ -84,6 +89,8 @@ GEM
       websocket (~> 1.0)
     sequel (4.15.0)
     thread_safe (0.3.4)
+    timers (4.0.1)
+      hitimes
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     websocket (1.2.1)
@@ -97,7 +104,9 @@ DEPENDENCIES
   activesupport
   bunny
   capybara
+  celluloid
   connection_pool
+  faker
   git-smart
   mongoid
   mysql2

@@ -1,4 +1,5 @@
 class Agent
+
   AgentName  = '101' # Original extensions from yml recording
   AdminName  = '999' #
   AgentMutex =  Mutex.new

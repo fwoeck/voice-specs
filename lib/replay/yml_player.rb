@@ -1,15 +1,11 @@
 class YmlPlayer
+
   attr_reader :log, :tn, :tm, :t0, :dt, :obj, :dump, :agent, :cust
 
 
   def initialize(filename='./fixtures/successful-call.yml')
     @log = YAML.load_file(filename)
     log.each { |lo| lo.data = Marshal.load(lo.data) }
-
-    @tn = Time.now
-    @tm = Digest::MD5.hexdigest(tn.to_f.to_s)[0..11]
-    @t0 = log.first.time
-    @dt = tn - t0
   end
 
 
@@ -60,14 +56,43 @@ class YmlPlayer
   end
 
 
+  def tag_history_entry
+    Customer.rpc_update_history_with(
+      user_id:     agent.id,
+      tags:        fake_tags,
+      remarks:     Faker::Lorem.sentence(3, true, 20),
+      customer_id: Customer.where(caller_ids: cust).first.id
+    )
+  end
+
+
+  def fake_tags
+    [ SpecConfig['languages'].keys.sample.upcase,
+      SpecConfig['skills'].keys.sample.sub('_', '-'),
+      SpecConfig['default_tags'].keys.sample
+    ]
+  end
+
+
+  def reset_data_for(_cust, _agent)
+    @cust  = _cust
+    @agent = _agent
+
+    @tn    = Time.now
+    @tm    = Digest::MD5.hexdigest(tn.to_f.to_s)[0..11]
+    @t0    = log.first.time
+    @dt    = tn - t0
+  end
+
+
   def start
     Agent.with_agent { |_agent|
       Customer.with_customer { |_cust|
-        @cust  = _cust
-        @agent = _agent
+        reset_data_for(_cust, _agent)
 
         print "Replay agent ##{agent.name} with caller ##{cust}\n"
         replay_capture_data
+        tag_history_entry
         print "Finish agent ##{agent.name} with caller ##{cust}\n"
       }
     }
@@ -78,8 +103,7 @@ class YmlPlayer
     threads = []
 
     count.times do |idx|
-      sleep rand(4)
-      print "Start call ##{'%04d' % (idx+1)}\n"
+      sleep 3 * rand(0.9)
       threads << Thread.new { YmlPlayer.new.start }
     end
     threads.map(&:join)
