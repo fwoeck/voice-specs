@@ -1,6 +1,7 @@
 class Customer
-  include Mongoid::Document
+
   CustMutex = Mutex.new
+  include Mongoid::Document
 
 
   field :email,      type: String,   default: ""
@@ -10,32 +11,41 @@ class Customer
   field :created_at, type: DateTime, default: -> { Time.now.utc }
 
 
-  def self.with_customer
-    sleep 1 while !(cust = checkout_customer)
-    yield cust
-  ensure
-    checkin_customer(cust)
-  end
+  class << self
+
+    def with_customer
+      sleep 1 while !(cust = checkout_customer)
+      yield cust
+    ensure
+      checkin_customer(cust)
+    end
 
 
-  def self.checkout_customer
-    CustMutex.synchronize {
-      all_caller_ids.delete all_caller_ids.sample
-    }
-  end
+    def checkout_customer
+      CustMutex.synchronize {
+        all_caller_ids.delete all_caller_ids.sample
+      }
+    end
 
 
-  def self.checkin_customer(cust)
-    return unless cust
+    def checkin_customer(cust)
+      return unless cust
 
-    CustMutex.synchronize {
-      all_caller_ids << cust
-    }
-  end
+      CustMutex.synchronize {
+        all_caller_ids << cust
+      }
+    end
 
 
-  def self.all_caller_ids
-    @_memo_all_ids ||= only(:caller_ids).to_a.map(&:caller_ids)
-                      .flatten.uniq - [Agent::AdminName]
+    def all_caller_ids
+      @_memo_all_ids ||= only(:caller_ids).to_a.map(&:caller_ids)
+                        .flatten.uniq - [Agent::AdminName]
+    end
+
+
+    def rpc_update_history_with(par)
+      par[:entry_id] = -1
+      RemoteRequest.rpc_to_custom(self.name, :update_history_with, [par])
+    end
   end
 end

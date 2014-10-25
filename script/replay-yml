@@ -24,13 +24,16 @@ require 'bundler'
 Bundler.setup
 
 require 'yaml'
+require 'faker'
 require 'bunny'
 require 'digest'
+require 'celluloid'
 require 'active_support/all'
 
 SpecConfig = YAML.load_file('./config/app.yml')
 CallCount  = [1, (ARGV[0] || 1).to_i].max
 
+require './lib/replay/remote_request'
 require './lib/replay/amqp_manager'
 require './lib/replay/connections'
 require './lib/replay/yml_player'

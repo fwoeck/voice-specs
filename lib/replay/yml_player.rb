@@ -1,4 +1,5 @@
 class YmlPlayer
+
   attr_reader :log, :tn, :tm, :t0, :dt, :obj, :dump, :agent, :cust
 
 
@@ -60,6 +61,24 @@ class YmlPlayer
   end
 
 
+  def tag_history_entry
+    Customer.rpc_update_history_with(
+      user_id:     agent.id,
+      tags:        fake_tags,
+      remarks:     Faker::Lorem.sentence(3, true, 20),
+      customer_id: Customer.where(caller_ids: cust).first.id
+    )
+  end
+
+
+  def fake_tags
+    [ SpecConfig['languages'].keys.sample.upcase,
+      SpecConfig['skills'].keys.sample.sub('_', '-'),
+      SpecConfig['default_tags'].keys.sample
+    ]
+  end
+
+
   def start
     Agent.with_agent { |_agent|
       Customer.with_customer { |_cust|
@@ -68,6 +87,7 @@ class YmlPlayer
 
         print "Replay agent ##{agent.name} with caller ##{cust}\n"
         replay_capture_data
+        tag_history_entry
         print "Finish agent ##{agent.name} with caller ##{cust}\n"
       }
     }
