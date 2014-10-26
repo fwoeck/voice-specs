@@ -33,7 +33,7 @@ if input == key
   puts
   system "sudo sv force-restart /etc/service/*"
   puts
-  system "cd #{rails_base}; bundle exec rake db:mongoid:create_indexes"
+  system "cd #{rails_base}; rake db:mongoid:create_indexes"
 else
   puts "Ok, exit without action."
 end
