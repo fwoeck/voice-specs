@@ -79,7 +79,7 @@ class YmlPlayer
     @agent = _agent
 
     @tn    = Time.now
-    @tm    = Digest::MD5.hexdigest(tn.to_f.to_s)[0..11]
+    @tm    = Digest::MD5.hexdigest((rand(0.9) + tn.to_f).to_s)[0..11]
     @t0    = log.first.time
     @dt    = tn - t0
   end
