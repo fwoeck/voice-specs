@@ -20,10 +20,20 @@ class Session
   end
 
 
-  def start
+  def login_as_admin
     use_client admin_name
     visit_home_url
     login_as admin_email, admin_pass
+  end
+
+
+  def create_first_agent
+  end
+
+
+  def start
+    login_as_admin
+    create_first_agent
   rescue => e
     puts e.message
   ensure

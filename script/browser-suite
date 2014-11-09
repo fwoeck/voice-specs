@@ -3,9 +3,9 @@
 require 'bundler'
 Bundler.setup
 
-require './lib/full_stack/setup'
-require './lib/full_stack/helpers'
-require './lib/full_stack/session'
+require './lib/suite/setup'
+require './lib/suite/helpers'
+require './lib/suite/session'
 
 s = Session.new
 s.setup
