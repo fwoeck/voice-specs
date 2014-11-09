@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'bundler'
+Bundler.setup
+
+require './lib/full_stack/setup'
+require './lib/full_stack/helpers'
+require './lib/full_stack/session'
+
+Session.new.start

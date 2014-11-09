@@ -8,7 +8,7 @@
 # are not possible.
 #
 # Invoke it with the number of calls to be made:
-# > script/replay-yml 100
+# > script/replay-events 100
 #
 # You may want to create some fake agents/customers before you start:
 # > curl 'https://127.0.0.1/seed/agents?count=30'

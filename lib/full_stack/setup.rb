@@ -1,6 +1,3 @@
-require 'bundler'
-Bundler.setup
-
 require 'rspec'
 require 'rspec/expectations'
 
@@ -8,10 +5,11 @@ require 'selenium-webdriver'
 require 'capybara/rspec'
 require 'capybara/dsl'
 
-require './spec/spec_helper'
+RSpec.configure do |config|
+  config.include Capybara::DSL
+end
 
-
-Capybara.app_host    = 'https://33.33.33.100'
+Capybara.app_host    = 'https://voice01.wimdu.com'
 Capybara.run_server  =  false
 Capybara.server_port =  443
 
