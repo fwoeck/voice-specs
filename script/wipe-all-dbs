@@ -6,21 +6,22 @@ MongoConf  = YAML.load_file('./config/mongoid.yml')
 
 
 class DbCleaner
-  attr_reader :mongodb, :el_host, :el_port, :mysql_db, :mysql_user,
+  attr_reader :mongodb, :el_host, :el_port, :mysql_db, :mysql_user, :rails_env,
               :mysql_pass, :rails_base, :rrd_file, :confirm, :force
 
 
-  def initialize(_force=false)
+  def initialize(_force, conf=SpecConfig)
     @force      = _force
+    @mysql_db   = conf['mysql_db']
+    @rails_env  = conf['rails_env']
+    @rrd_file   = conf['stats_rrd']
+    @mysql_user = conf['mysql_user']
+    @mysql_pass = conf['mysql_pass']
+    @rails_base = conf['rails_base']
+    @el_host    = conf['elastic_host']
+    @el_port    = conf['elastic_port']
     @confirm    = (0..9).to_a.sample(6).map(&:to_s).join
-    @mongodb    = MongoConf[SpecConfig['rails_env']]['sessions']['default']['database']
-    @el_host    = SpecConfig['elastic_host']
-    @el_port    = SpecConfig['elastic_port']
-    @mysql_db   = SpecConfig['mysql_db']
-    @mysql_user = SpecConfig['mysql_user']
-    @mysql_pass = SpecConfig['mysql_pass']
-    @rails_base = SpecConfig['rails_base']
-    @rrd_file   = SpecConfig['stats_rrd']
+    @mongodb    = MongoConf[rails_env]['sessions']['default']['database']
   end
 
 
@@ -31,7 +32,7 @@ class DbCleaner
     system "curl -s -XDELETE 'http://#{el_host}:#{el_port}/_all/' >/dev/null"
     system "mysql -u#{mysql_user} -p#{mysql_pass} -Nse 'show tables' #{mysql_db} | grep -v schema_migrations | while read table; do mysql -u#{mysql_user} -p#{mysql_pass} -e \"truncate table $table\" #{mysql_db}; done"
     system "sudo sv force-restart /etc/service/* >/dev/null"
-    system "cd #{rails_base}; rake db:mongoid:create_indexes voice:seed_admin_user >/dev/null"
+    system "BUNDLE_GEMFILE='' bash -l -c 'cd #{rails_base}; rake db:mongoid:create_indexes voice:seed_admin_user >/dev/null'"
   end
 
 
@@ -40,8 +41,7 @@ class DbCleaner
     puts '- wipe all databases,'
     puts '- restart the ruby services,'
     puts '- seed the admin user.'
-    puts
-    puts "If you really want to do that, enter #{confirm}."
+    print "If you really want to do that, enter #{confirm}: "
   end
 
 

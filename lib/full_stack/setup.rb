@@ -5,11 +5,14 @@ require 'selenium-webdriver'
 require 'capybara/rspec'
 require 'capybara/dsl'
 
+require 'yaml'
+SpecConfig = YAML.load_file('./config/app.yml')
+
 RSpec.configure do |config|
   config.include Capybara::DSL
 end
 
-Capybara.app_host    = 'https://voice01.wimdu.com'
+Capybara.app_host    = "https://#{SpecConfig['hostname']}"
 Capybara.run_server  =  false
 Capybara.server_port =  443
 

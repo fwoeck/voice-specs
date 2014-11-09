@@ -25,4 +25,16 @@ module Helpers
     window = Capybara.current_session.driver.browser.manage.window
     window.resize_to(width, height)
   end
+
+
+  def wipe_dbs
+    system 'CONFIRM_DELETE=1 ./script/wipe-all-dbs'
+  end
+
+
+  def wait_for_puma
+    while `lsof -i :#{SpecConfig['puma_port']} | grep LISTEN | wc -l`.to_i < 1
+      sleep 1
+    end
+  end
 end

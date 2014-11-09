@@ -1,27 +1,29 @@
 class Session
 
+  attr_reader :admin_name, :admin_email, :admin_pass
+
   include Helpers
   include Capybara::DSL
   include RSpec::Matchers
 
 
+  def initialize
+    @admin_email = SpecConfig['admin_email']
+    @admin_name  = SpecConfig['admin_name']
+    @admin_pass  = SpecConfig['admin_pass']
+  end
+
+
   def setup
-    system 'CONFIRM_DELETE=1 ./script/wipe-all-dbs'
+    wipe_dbs
+    wait_for_puma
   end
 
 
   def start
-    use_client(100)
+    use_client admin_name
     visit_home_url
-    login_as('frank.woeckener@wimdu.com')
-
-    use_client(101)
-    visit_home_url
-    login_as('eldridge-shanahan@mail.com')
-
-    use_client(103)
-    visit_home_url
-    login_as('anika-borer@mail.com')
+    login_as admin_email, admin_pass
   rescue => e
     puts e.message
   ensure

@@ -7,4 +7,6 @@ require './lib/full_stack/setup'
 require './lib/full_stack/helpers'
 require './lib/full_stack/session'
 
-Session.new.start
+s = Session.new
+s.setup
+s.start
