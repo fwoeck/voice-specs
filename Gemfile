@@ -13,5 +13,3 @@ gem 'activesupport'
 gem 'connection_pool'
 gem 'selenium-webdriver'
 gem 'sippy_cup', path: './sippy_cup'
-
-gem 'git-smart', require: false

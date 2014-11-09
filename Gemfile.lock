@@ -22,7 +22,7 @@ GEM
     amq-protocol (1.9.2)
     bson (2.3.0)
     builder (3.2.2)
-    bunny (1.6.0)
+    bunny (1.6.2)
       amq-protocol (>= 1.9.2)
     capybara (2.4.4)
       mime-types (>= 1.16)
@@ -34,14 +34,11 @@ GEM
       timers (~> 4.0.0)
     childprocess (0.5.5)
       ffi (~> 1.0, >= 1.0.11)
-    colorize (0.7.3)
     connection_pool (2.0.0)
     diff-lcs (1.2.5)
     faker (1.4.3)
       i18n (~> 0.5)
     ffi (1.9.6)
-    git-smart (0.1.10)
-      colorize
     hitimes (1.2.2)
     i18n (0.6.11)
     json (1.8.1)
@@ -59,7 +56,7 @@ GEM
       optionable (~> 0.2.0)
     multi_json (1.10.1)
     mysql2 (0.3.16)
-    nokogiri (1.6.4)
+    nokogiri (1.6.4.1)
       mini_portile (~> 0.6.0)
     optionable (0.2.0)
     origin (2.1.1)
@@ -107,7 +104,6 @@ DEPENDENCIES
   celluloid
   connection_pool
   faker
-  git-smart
   mongoid
   mysql2
   redis
