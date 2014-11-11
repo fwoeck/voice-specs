@@ -37,7 +37,7 @@ module Helpers
   def use_client(num)
     all_sessions.add num
     Capybara.session_name = num
-    sleep 0.1
+    sleep 0.5
   end
 
 
