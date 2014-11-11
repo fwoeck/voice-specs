@@ -1,167 +1,169 @@
 ---
 - !ruby/struct:LogObject
-  time: 2014-10-21 02:15:10.456514993 Z
-  data: "\x04\bo:\nAgent\f:\b@idi\x06:\n@nameI\"\b999\x06:\x06ET:\f@skills[\x06I\"\nother\x06;\bT:\x0F@languages[\x06I\"\aen\x06;\bT:\x10@visibility:\vonline:\x0E@activity:\ftalking:\r@call_idI\")341b048c-efd2-4fb9-8ed4-86dac9258d62\x06;\bT"
+  time: 2014-11-08 09:29:44.096035994 Z
+  data: "\x04\bo:\nAgent\f:\b@idi\b:\n@nameI\"\b101\x06:\x06ET:\f@skills[\tI\"\x10ext_booking\x06;\bTI\"\x10new_booking\x06;\bTI\"\nother\x06;\bTI\"\fpayment\x06;\bT:\x0F@languages[\nI\"\ade\x06;\bTI\"\aen\x06;\bTI\"\aes\x06;\bTI\"\afr\x06;\bTI\"\ait\x06;\bT:\x10@visibility:\vonline:\x0E@activity:\vsilent:\r@call_id0"
+  custom: false
+  numbers: false
+- !ruby/struct:LogObject
+  time: 2014-11-08 09:29:48.978715561 Z
+  data: "\x04\bo:\nAgent\f:\b@idi\x06:\n@nameI\"\b999\x06:\x06ET:\f@skills[\x06I\"\nother\x06;\bT:\x0F@languages[\aI\"\ade\x06;\bTI\"\aen\x06;\bT:\x10@visibility:\vonline:\x0E@activity:\ftalking:\r@call_idI\")3d037b28-4808-4e21-8c61-f72b32951e7e\x06;\bT"
   custom: false
   numbers: true
 - !ruby/struct:LogObject
-  time: 2014-10-21 02:15:10.457543700 Z
+  time: 2014-11-08 09:29:48.984189351 Z
   data: !binary |-
-    BAhvOglDYWxsEjoNQGNhbGxfaWRJIikzNDFiMDQ4Yy1lZmQyLTRmYjktOGVk
-    NC04NmRhYzkyNThkNjIGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZDA6
+    BAhvOglDYWxsEToNQGNhbGxfaWRJIikzZDAzN2IyOC00ODA4LTRlMjEtOGM2
+    MS1mNzJiMzI5NTFlN2UGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZDA6
     DkBsYW5ndWFnZTA6C0Bza2lsbDA6D0BleHRlbnNpb25JIgYwBjsHVDoPQGNh
-    bGxlcl9pZEkiCDk5OQY7B1Q6DEBodW5ndXAwOg9AY2FsbGVkX2F0SXU6CVRp
-    bWUNoqYcwNqppjwJOg1uYW5vX251bWlzOg1uYW5vX2RlbmkGOg1zdWJtaWNy
-    byIGEToJem9uZUkiCFVUQwY7B1Q6DUBtYWlsYm94MDoPQHF1ZXVlZF9hdDA6
+    bGxlcl9pZEkiCDk5OQY7B1Q6D0BjYWxsZWRfYXRJdToJVGltZQ0JqRzAdKoO
+    dwk6DW5hbm9fbnVtaQIcAjoNbmFub19kZW5pBjoNc3VibWljcm8iBlQ6CXpv
+    bmVJIghVVEMGOwdUOg1AbWFpbGJveDA6D0BxdWV1ZWRfYXQwOg9AaHVuZ3Vw
+    X2F0MDoTQGRpc3BhdGNoZWRfYXQw
+  custom: false
+  numbers: true
+- !ruby/struct:LogObject
+  time: 2014-11-08 09:29:55.073801679 Z
+  data: !binary |-
+    BAhvOglDYWxsEToNQGNhbGxfaWRJIikzZDAzN2IyOC00ODA4LTRlMjEtOGM2
+    MS1mNzJiMzI5NTFlN2UGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZDA6
+    DkBsYW5ndWFnZUkiB2RlBjsHVDoLQHNraWxsMDoPQGV4dGVuc2lvbkkiBjAG
+    OwdUOg9AY2FsbGVyX2lkSSIIOTk5BjsHVDoPQGNhbGxlZF9hdEl1OglUaW1l
+    DQmpHMB0qg53CToNbmFub19udW1pAhwCOg1uYW5vX2RlbmkGOg1zdWJtaWNy
+    byIGVDoJem9uZUkiCFVUQwY7B1Q6DUBtYWlsYm94MDoPQHF1ZXVlZF9hdDA6
     D0BodW5ndXBfYXQwOhNAZGlzcGF0Y2hlZF9hdDA=
   custom: false
   numbers: true
 - !ruby/struct:LogObject
-  time: 2014-10-21 02:15:17.632592241 Z
+  time: 2014-11-08 09:30:03.446156643 Z
   data: !binary |-
-    BAhvOglDYWxsEjoNQGNhbGxfaWRJIikzNDFiMDQ4Yy1lZmQyLTRmYjktOGVk
-    NC04NmRhYzkyNThkNjIGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZDA6
-    DkBsYW5ndWFnZUkiB2VzBjsHVDoLQHNraWxsMDoPQGV4dGVuc2lvbkkiBjAG
-    OwdUOg9AY2FsbGVyX2lkSSIIOTk5BjsHVDoMQGh1bmd1cDA6D0BjYWxsZWRf
-    YXRJdToJVGltZQ2iphzA2qmmPAk6DW5hbm9fbnVtaXM6DW5hbm9fZGVuaQY6
-    DXN1Ym1pY3JvIgYROgl6b25lSSIIVVRDBjsHVDoNQG1haWxib3gwOg9AcXVl
-    dWVkX2F0MDoPQGh1bmd1cF9hdDA6E0BkaXNwYXRjaGVkX2F0MA==
+    BAhvOglDYWxsEToNQGNhbGxfaWRJIikzZDAzN2IyOC00ODA4LTRlMjEtOGM2
+    MS1mNzJiMzI5NTFlN2UGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZDA6
+    DkBsYW5ndWFnZUkiB2RlBjsHVDoLQHNraWxsSSIQZXh0X2Jvb2tpbmcGOwdU
+    Og9AZXh0ZW5zaW9uSSIGMAY7B1Q6D0BjYWxsZXJfaWRJIgg5OTkGOwdUOg9A
+    Y2FsbGVkX2F0SXU6CVRpbWUNCakcwHSqDncJOg1uYW5vX251bWkCHAI6DW5h
+    bm9fZGVuaQY6DXN1Ym1pY3JvIgZUOgl6b25lSSIIVVRDBjsHVDoNQG1haWxi
+    b3gwOg9AcXVldWVkX2F0MDoPQGh1bmd1cF9hdDA6E0BkaXNwYXRjaGVkX2F0
+    MA==
   custom: false
   numbers: true
 - !ruby/struct:LogObject
-  time: 2014-10-21 02:15:26.196527100 Z
+  time: 2014-11-08 09:30:07.876609619 Z
   data: !binary |-
-    BAhvOglDYWxsEjoNQGNhbGxfaWRJIikzNDFiMDQ4Yy1lZmQyLTRmYjktOGVk
-    NC04NmRhYzkyNThkNjIGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZDA6
-    DkBsYW5ndWFnZUkiB2VzBjsHVDoLQHNraWxsSSIQZXh0X2Jvb2tpbmcGOwdU
-    Og9AZXh0ZW5zaW9uSSIGMAY7B1Q6D0BjYWxsZXJfaWRJIgg5OTkGOwdUOgxA
-    aHVuZ3VwMDoPQGNhbGxlZF9hdEl1OglUaW1lDaKmHMDaqaY8CToNbmFub19u
-    dW1pczoNbmFub19kZW5pBjoNc3VibWljcm8iBhE6CXpvbmVJIghVVEMGOwdU
-    Og1AbWFpbGJveDA6D0BxdWV1ZWRfYXQwOg9AaHVuZ3VwX2F0MDoTQGRpc3Bh
-    dGNoZWRfYXQw
+    BAhvOglDYWxsEToNQGNhbGxfaWRJIikzZDAzN2IyOC00ODA4LTRlMjEtOGM2
+    MS1mNzJiMzI5NTFlN2UGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZDA6
+    DkBsYW5ndWFnZUkiB2RlBjsHVDoLQHNraWxsSSIQZXh0X2Jvb2tpbmcGOwdU
+    Og9AZXh0ZW5zaW9uSSIGMAY7B1Q6D0BjYWxsZXJfaWRJIgg5OTkGOwdUOg9A
+    Y2FsbGVkX2F0SXU6CVRpbWUNCakcwHSqDncJOg1uYW5vX251bWkCHAI6DW5h
+    bm9fZGVuaQY6DXN1Ym1pY3JvIgZUOgl6b25lSSIIVVRDBjsHVDoNQG1haWxi
+    b3gwOg9AcXVldWVkX2F0SXU7Dw0JqRzAuC59eAk7EGkCXwI7EWkGOxIiB2Bw
+    OxNJIghVVEMGOwdUOg9AaHVuZ3VwX2F0MDoTQGRpc3BhdGNoZWRfYXQw
   custom: false
   numbers: true
 - !ruby/struct:LogObject
-  time: 2014-10-21 02:15:29.890378556 Z
+  time: 2014-11-08 09:30:10.724839952 Z
   data: !binary |-
-    BAhvOglDYWxsEjoNQGNhbGxfaWRJIikzNDFiMDQ4Yy1lZmQyLTRmYjktOGVk
-    NC04NmRhYzkyNThkNjIGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZDA6
-    DkBsYW5ndWFnZUkiB2VzBjsHVDoLQHNraWxsSSIQZXh0X2Jvb2tpbmcGOwdU
-    Og9AZXh0ZW5zaW9uSSIGMAY7B1Q6D0BjYWxsZXJfaWRJIgg5OTkGOwdUOgxA
-    aHVuZ3VwMDoPQGNhbGxlZF9hdEl1OglUaW1lDaKmHMDaqaY8CToNbmFub19u
-    dW1pczoNbmFub19kZW5pBjoNc3VibWljcm8iBhE6CXpvbmVJIghVVEMGOwdU
-    Og1AbWFpbGJveDA6D0BxdWV1ZWRfYXRJdTsQDaKmHMDOit09CTsRaQLXAjsS
-    aQY7EyIHcnA7FEkiCFVUQwY7B1Q6D0BodW5ndXBfYXQwOhNAZGlzcGF0Y2hl
-    ZF9hdDA=
+    BAhvOglDYWxsEToNQGNhbGxfaWRJIik4NGQ0OGI5ZC1jMzg1LTQwNDUtYjRh
+    My05ZjI2ZWUzOGNkMTAGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZEki
+    KTNkMDM3YjI4LTQ4MDgtNGUyMS04YzYxLWY3MmIzMjk1MWU3ZQY7B1Q6DkBs
+    YW5ndWFnZUkiB2RlBjsHVDoLQHNraWxsSSIQZXh0X2Jvb2tpbmcGOwdUOg9A
+    ZXh0ZW5zaW9uSSIIMTAxBjsHVDoPQGNhbGxlcl9pZEkiCDk5OQY7B1Q6D0Bj
+    YWxsZWRfYXRJdToJVGltZQ0JqRzANciqeAk6DW5hbm9fbnVtaS86DW5hbm9f
+    ZGVuaQY6DXN1Ym1pY3JvIgcEIDoJem9uZUkiCFVUQwY7B1Q6DUBtYWlsYm94
+    MDoPQHF1ZXVlZF9hdDA6D0BodW5ndXBfYXQwOhNAZGlzcGF0Y2hlZF9hdDA=
   custom: false
   numbers: true
 - !ruby/struct:LogObject
-  time: 2014-10-21 02:15:30.819561867 Z
-  data: !binary |-
-    BAhvOglDYWxsEjoNQGNhbGxfaWRJIilmMzhmOTJmMC1iMTgxLTQyNDEtOTNh
-    MS04NzUyNWJhOGE4MTkGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZEki
-    KTM0MWIwNDhjLWVmZDItNGZiOS04ZWQ0LTg2ZGFjOTI1OGQ2MgY7B1Q6DkBs
-    YW5ndWFnZUkiB2VzBjsHVDoLQHNraWxsSSIQZXh0X2Jvb2tpbmcGOwdUOg9A
-    ZXh0ZW5zaW9uSSIIMTAxBjsHVDoPQGNhbGxlcl9pZEkiCDk5OQY7B1Q6DEBo
-    dW5ndXAwOg9AY2FsbGVkX2F0SXU6CVRpbWUNoqYcwCJ17D0JOg1uYW5vX251
-    bWktOg1uYW5vX2RlbmkGOg1zdWJtaWNybyIGBDoJem9uZUkiCFVUQwY7B1Q6
-    DUBtYWlsYm94MDoPQHF1ZXVlZF9hdDA6D0BodW5ndXBfYXQwOhNAZGlzcGF0
-    Y2hlZF9hdDA=
-  custom: false
-  numbers: true
-- !ruby/struct:LogObject
-  time: 2014-10-21 02:15:30.824266259 Z
-  data: "\x04\bo:\nAgent\f:\b@idi\a:\n@nameI\"\b101\x06:\x06ET:\f@skills[\tI\"\x10ext_booking\x06;\bTI\"\x10new_booking\x06;\bTI\"\nother\x06;\bTI\"\fpayment\x06;\bT:\x0F@languages[\nI\"\ade\x06;\bTI\"\aen\x06;\bTI\"\aes\x06;\bTI\"\afr\x06;\bTI\"\ait\x06;\bT:\x10@visibility:\vonline:\x0E@activity:\fringing:\r@call_idI\")f38f92f0-b181-4241-93a1-87525ba8a819\x06;\bT"
+  time: 2014-11-08 09:30:10.726436479 Z
+  data: "\x04\bo:\nAgent\f:\b@idi\b:\n@nameI\"\b101\x06:\x06ET:\f@skills[\tI\"\x10ext_booking\x06;\bTI\"\x10new_booking\x06;\bTI\"\nother\x06;\bTI\"\fpayment\x06;\bT:\x0F@languages[\nI\"\ade\x06;\bTI\"\aen\x06;\bTI\"\aes\x06;\bTI\"\afr\x06;\bTI\"\ait\x06;\bT:\x10@visibility:\vonline:\x0E@activity:\fringing:\r@call_idI\")84d48b9d-c385-4045-b4a3-9f26ee38cd10\x06;\bT"
   custom: true
   numbers: false
 - !ruby/struct:LogObject
-  time: 2014-10-21 02:15:32.738046341 Z
+  time: 2014-11-08 09:30:12.961416388 Z
   data: !binary |-
-    BAhvOglDYWxsEjoNQGNhbGxfaWRJIilmMzhmOTJmMC1iMTgxLTQyNDEtOTNh
-    MS04NzUyNWJhOGE4MTkGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZEki
-    KTM0MWIwNDhjLWVmZDItNGZiOS04ZWQ0LTg2ZGFjOTI1OGQ2MgY7B1Q6DkBs
-    YW5ndWFnZUkiB2VzBjsHVDoLQHNraWxsSSIQZXh0X2Jvb2tpbmcGOwdUOg9A
-    ZXh0ZW5zaW9uSSIIMTAxBjsHVDoPQGNhbGxlcl9pZEkiCDk5OQY7B1Q6DEBo
-    dW5ndXAwOg9AY2FsbGVkX2F0SXU6CVRpbWUNoqYcwCJ17D0JOg1uYW5vX251
-    bWktOg1uYW5vX2RlbmkGOg1zdWJtaWNybyIGBDoJem9uZUkiCFVUQwY7B1Q6
-    DUBtYWlsYm94MDoPQHF1ZXVlZF9hdDA6D0BodW5ndXBfYXQwOhNAZGlzcGF0
-    Y2hlZF9hdDA=
+    BAhvOglDYWxsEToNQGNhbGxfaWRJIik4NGQ0OGI5ZC1jMzg1LTQwNDUtYjRh
+    My05ZjI2ZWUzOGNkMTAGOgZFVDoOQGNhbGxfdGFnMDoPQG9yaWdpbl9pZEki
+    KTNkMDM3YjI4LTQ4MDgtNGUyMS04YzYxLWY3MmIzMjk1MWU3ZQY7B1Q6DkBs
+    YW5ndWFnZUkiB2RlBjsHVDoLQHNraWxsSSIQZXh0X2Jvb2tpbmcGOwdUOg9A
+    ZXh0ZW5zaW9uSSIIMTAxBjsHVDoPQGNhbGxlcl9pZEkiCDk5OQY7B1Q6D0Bj
+    YWxsZWRfYXRJdToJVGltZQ0JqRzANciqeAk6DW5hbm9fbnVtaS86DW5hbm9f
+    ZGVuaQY6DXN1Ym1pY3JvIgcEIDoJem9uZUkiCFVUQwY7B1Q6DUBtYWlsYm94
+    MDoPQHF1ZXVlZF9hdDA6D0BodW5ndXBfYXQwOhNAZGlzcGF0Y2hlZF9hdDA=
   custom: false
   numbers: true
 - !ruby/struct:LogObject
-  time: 2014-10-21 02:15:32.744980956 Z
-  data: "\x04\bo:\nAgent\f:\b@idi\a:\n@nameI\"\b101\x06:\x06ET:\f@skills[\tI\"\x10ext_booking\x06;\bTI\"\x10new_booking\x06;\bTI\"\nother\x06;\bTI\"\fpayment\x06;\bT:\x0F@languages[\nI\"\ade\x06;\bTI\"\aen\x06;\bTI\"\aes\x06;\bTI\"\afr\x06;\bTI\"\ait\x06;\bT:\x10@visibility:\vonline:\x0E@activity:\ftalking:\r@call_idI\")f38f92f0-b181-4241-93a1-87525ba8a819\x06;\bT"
+  time: 2014-11-08 09:30:12.985993173 Z
+  data: "\x04\bo:\nAgent\f:\b@idi\b:\n@nameI\"\b101\x06:\x06ET:\f@skills[\tI\"\x10ext_booking\x06;\bTI\"\x10new_booking\x06;\bTI\"\nother\x06;\bTI\"\fpayment\x06;\bT:\x0F@languages[\nI\"\ade\x06;\bTI\"\aen\x06;\bTI\"\aes\x06;\bTI\"\afr\x06;\bTI\"\ait\x06;\bT:\x10@visibility:\vonline:\x0E@activity:\ftalking:\r@call_idI\")84d48b9d-c385-4045-b4a3-9f26ee38cd10\x06;\bT"
   custom: true
   numbers: true
 - !ruby/struct:LogObject
-  time: 2014-10-21 02:15:32.808079785 Z
+  time: 2014-11-08 09:30:13.078104582 Z
   data: !binary |-
-    BAhvOglDYWxsEjoNQGNhbGxfaWRJIilmMzhmOTJmMC1iMTgxLTQyNDEtOTNh
-    MS04NzUyNWJhOGE4MTkGOgZFVDoOQGNhbGxfdGFnSSImU0lQLzEwMS0wMDAw
-    MDAwMyBTSVAvOTk5LTAwMDAwMDAyBjsHVDoPQG9yaWdpbl9pZEkiKTM0MWIw
-    NDhjLWVmZDItNGZiOS04ZWQ0LTg2ZGFjOTI1OGQ2MgY7B1Q6DkBsYW5ndWFn
-    ZUkiB2VzBjsHVDoLQHNraWxsSSIQZXh0X2Jvb2tpbmcGOwdUOg9AZXh0ZW5z
-    aW9uSSIIMTAxBjsHVDoPQGNhbGxlcl9pZEkiCDk5OQY7B1Q6DEBodW5ndXAw
-    Og9AY2FsbGVkX2F0SXU6CVRpbWUNoqYcwCJ17D0JOg1uYW5vX251bWktOg1u
-    YW5vX2RlbmkGOg1zdWJtaWNybyIGBDoJem9uZUkiCFVUQwY7B1Q6DUBtYWls
-    Ym94MDoPQHF1ZXVlZF9hdDA6D0BodW5ndXBfYXQwOhNAZGlzcGF0Y2hlZF9h
-    dEl1OxANoqYcwJk6DD4JOxFpMDsSaQY7EyIHBDA7FEkiCFVUQwY7B1Q=
+    BAhvOglDYWxsEToNQGNhbGxfaWRJIik4NGQ0OGI5ZC1jMzg1LTQwNDUtYjRh
+    My05ZjI2ZWUzOGNkMTAGOgZFVDoOQGNhbGxfdGFnSSImU0lQLzEwMS0wMDAw
+    MDAwMSBTSVAvOTk5LTAwMDAwMDAwBjsHVDoPQG9yaWdpbl9pZEkiKTNkMDM3
+    YjI4LTQ4MDgtNGUyMS04YzYxLWY3MmIzMjk1MWU3ZQY7B1Q6DkBsYW5ndWFn
+    ZUkiB2RlBjsHVDoLQHNraWxsSSIQZXh0X2Jvb2tpbmcGOwdUOg9AZXh0ZW5z
+    aW9uSSIIMTAxBjsHVDoPQGNhbGxlcl9pZEkiCDk5OQY7B1Q6D0BjYWxsZWRf
+    YXRJdToJVGltZQ0JqRzANciqeAk6DW5hbm9fbnVtaS86DW5hbm9fZGVuaQY6
+    DXN1Ym1pY3JvIgcEIDoJem9uZUkiCFVUQwY7B1Q6DUBtYWlsYm94MDoPQHF1
+    ZXVlZF9hdDA6D0BodW5ndXBfYXQwOhNAZGlzcGF0Y2hlZF9hdEl1Ow8NCakc
+    wNDR0HgJOxBpAhUCOxFpBjsSIgdTMDsTSSIIVVRDBjsHVA==
   custom: false
   numbers: true
 - !ruby/struct:LogObject
-  time: 2014-10-21 02:15:32.817241600 Z
+  time: 2014-11-08 09:30:13.078360239 Z
   data: !binary |-
-    BAhvOglDYWxsEjoNQGNhbGxfaWRJIikzNDFiMDQ4Yy1lZmQyLTRmYjktOGVk
-    NC04NmRhYzkyNThkNjIGOgZFVDoOQGNhbGxfdGFnSSImU0lQLzEwMS0wMDAw
-    MDAwMyBTSVAvOTk5LTAwMDAwMDAyBjsHVDoPQG9yaWdpbl9pZDA6DkBsYW5n
-    dWFnZUkiB2VzBjsHVDoLQHNraWxsSSIQZXh0X2Jvb2tpbmcGOwdUOg9AZXh0
-    ZW5zaW9uSSIGMAY7B1Q6D0BjYWxsZXJfaWRJIgg5OTkGOwdUOgxAaHVuZ3Vw
-    MDoPQGNhbGxlZF9hdEl1OglUaW1lDaKmHMDaqaY8CToNbmFub19udW1pczoN
-    bmFub19kZW5pBjoNc3VibWljcm8iBhE6CXpvbmVJIghVVEMGOwdUOg1AbWFp
-    bGJveDA6D0BxdWV1ZWRfYXRJdTsQDaKmHMDOit09CTsRaQLXAjsSaQY7EyIH
-    cnA7FEkiCFVUQwY7B1Q6D0BodW5ndXBfYXQwOhNAZGlzcGF0Y2hlZF9hdEl1
-    OxANoqYcwO5wDD4JOxFpAlkBOxJpBjsTIgc0UDsUSSIIVVRDBjsHVA==
+    BAhvOglDYWxsEToNQGNhbGxfaWRJIikzZDAzN2IyOC00ODA4LTRlMjEtOGM2
+    MS1mNzJiMzI5NTFlN2UGOgZFVDoOQGNhbGxfdGFnSSImU0lQLzEwMS0wMDAw
+    MDAwMSBTSVAvOTk5LTAwMDAwMDAwBjsHVDoPQG9yaWdpbl9pZDA6DkBsYW5n
+    dWFnZUkiB2RlBjsHVDoLQHNraWxsSSIQZXh0X2Jvb2tpbmcGOwdUOg9AZXh0
+    ZW5zaW9uSSIGMAY7B1Q6D0BjYWxsZXJfaWRJIgg5OTkGOwdUOg9AY2FsbGVk
+    X2F0SXU6CVRpbWUNCakcwHSqDncJOg1uYW5vX251bWkCHAI6DW5hbm9fZGVu
+    aQY6DXN1Ym1pY3JvIgZUOgl6b25lSSIIVVRDBjsHVDoNQG1haWxib3gwOg9A
+    cXVldWVkX2F0SXU7Dw0JqRzAuC59eAk7EGkCXwI7EWkGOxIiB2BwOxNJIghV
+    VEMGOwdUOg9AaHVuZ3VwX2F0MDoTQGRpc3BhdGNoZWRfYXRJdTsPDQmpHMAH
+    +dB4CTsQaQL9AjsRaQY7EiIHdlA7E0kiCFVUQwY7B1Q=
   custom: false
   numbers: true
 - !ruby/struct:LogObject
-  time: 2014-10-21 02:16:14.327763317 Z
-  data: "\x04\bo:\nAgent\f:\b@idi\a:\n@nameI\"\b101\x06:\x06ET:\f@skills[\tI\"\x10ext_booking\x06;\bTI\"\x10new_booking\x06;\bTI\"\nother\x06;\bTI\"\fpayment\x06;\bT:\x0F@languages[\nI\"\ade\x06;\bTI\"\aen\x06;\bTI\"\aes\x06;\bTI\"\afr\x06;\bTI\"\ait\x06;\bT:\x10@visibility:\vonline:\x0E@activity:\vsilent:\r@call_idI\")f38f92f0-b181-4241-93a1-87525ba8a819\x06;\bT"
+  time: 2014-11-08 09:30:24.568091529 Z
+  data: "\x04\bo:\nAgent\f:\b@idi\b:\n@nameI\"\b101\x06:\x06ET:\f@skills[\tI\"\x10ext_booking\x06;\bTI\"\x10new_booking\x06;\bTI\"\nother\x06;\bTI\"\fpayment\x06;\bT:\x0F@languages[\nI\"\ade\x06;\bTI\"\aen\x06;\bTI\"\aes\x06;\bTI\"\afr\x06;\bTI\"\ait\x06;\bT:\x10@visibility:\vonline:\x0E@activity:\vsilent:\r@call_idI\")84d48b9d-c385-4045-b4a3-9f26ee38cd10\x06;\bT"
   custom: false
   numbers: false
 - !ruby/struct:LogObject
-  time: 2014-10-21 02:16:14.332162522 Z
+  time: 2014-11-08 09:30:24.602644657 Z
   data: !binary |-
-    BAhvOglDYWxsEjoNQGNhbGxfaWRJIilmMzhmOTJmMC1iMTgxLTQyNDEtOTNh
-    MS04NzUyNWJhOGE4MTkGOgZFVDoOQGNhbGxfdGFnSSImU0lQLzEwMS0wMDAw
-    MDAwMyBTSVAvOTk5LTAwMDAwMDAyBjsHVDoPQG9yaWdpbl9pZEkiKTM0MWIw
-    NDhjLWVmZDItNGZiOS04ZWQ0LTg2ZGFjOTI1OGQ2MgY7B1Q6DkBsYW5ndWFn
-    ZUkiB2VzBjsHVDoLQHNraWxsSSIQZXh0X2Jvb2tpbmcGOwdUOg9AZXh0ZW5z
-    aW9uSSIIMTAxBjsHVDoPQGNhbGxlcl9pZEkiCDk5OQY7B1Q6DEBodW5ndXBU
-    Og9AY2FsbGVkX2F0SXU6CVRpbWUNoqYcwCJ17D0JOg1uYW5vX251bWktOg1u
-    YW5vX2RlbmkGOg1zdWJtaWNybyIGBDoJem9uZUkiCFVUQwY7B1Q6DUBtYWls
-    Ym94MDoPQHF1ZXVlZF9hdDA6D0BodW5ndXBfYXRJdTsQDaKmHMCZw+RACTsR
-    aQIbAjsSaQY7EyIHU5A7FEkiCFVUQwY7B1Q6E0BkaXNwYXRjaGVkX2F0SXU7
-    EA2iphzAmToMPgk7EWkwOxJpBjsTIgcEMDsUSSIIVVRDBjsHVA==
+    BAhvOglDYWxsEToNQGNhbGxfaWRJIik4NGQ0OGI5ZC1jMzg1LTQwNDUtYjRh
+    My05ZjI2ZWUzOGNkMTAGOgZFVDoOQGNhbGxfdGFnSSImU0lQLzEwMS0wMDAw
+    MDAwMSBTSVAvOTk5LTAwMDAwMDAwBjsHVDoPQG9yaWdpbl9pZEkiKTNkMDM3
+    YjI4LTQ4MDgtNGUyMS04YzYxLWY3MmIzMjk1MWU3ZQY7B1Q6DkBsYW5ndWFn
+    ZUkiB2RlBjsHVDoLQHNraWxsSSIQZXh0X2Jvb2tpbmcGOwdUOg9AZXh0ZW5z
+    aW9uSSIIMTAxBjsHVDoPQGNhbGxlcl9pZEkiCDk5OQY7B1Q6D0BjYWxsZWRf
+    YXRJdToJVGltZQ0JqRzANciqeAk6DW5hbm9fbnVtaS86DW5hbm9fZGVuaQY6
+    DXN1Ym1pY3JvIgcEIDoJem9uZUkiCFVUQwY7B1Q6DUBtYWlsYm94MDoPQHF1
+    ZXVlZF9hdDA6D0BodW5ndXBfYXRJdTsPDQmpHMCVaIh5CTsQaSo7EWkGOxIi
+    BwNwOxNJIghVVEMGOwdUOhNAZGlzcGF0Y2hlZF9hdEl1Ow8NCakcwNDR0HgJ
+    OxBpAhUCOxFpBjsSIgdTMDsTSSIIVVRDBjsHVA==
   custom: false
   numbers: true
 - !ruby/struct:LogObject
-  time: 2014-10-21 02:16:14.364308531 Z
-  data: "\x04\bo:\nAgent\f:\b@idi\x06:\n@nameI\"\b999\x06:\x06ET:\f@skills[\x06I\"\nother\x06;\bT:\x0F@languages[\x06I\"\aen\x06;\bT:\x10@visibility:\vonline:\x0E@activity:\vsilent:\r@call_id0"
+  time: 2014-11-08 09:30:24.651322534 Z
+  data: !binary |-
+    BAhvOglDYWxsEToNQGNhbGxfaWRJIikzZDAzN2IyOC00ODA4LTRlMjEtOGM2
+    MS1mNzJiMzI5NTFlN2UGOgZFVDoOQGNhbGxfdGFnSSImU0lQLzEwMS0wMDAw
+    MDAwMSBTSVAvOTk5LTAwMDAwMDAwBjsHVDoPQG9yaWdpbl9pZDA6DkBsYW5n
+    dWFnZUkiB2RlBjsHVDoLQHNraWxsSSIQZXh0X2Jvb2tpbmcGOwdUOg9AZXh0
+    ZW5zaW9uSSIGMAY7B1Q6D0BjYWxsZXJfaWRJIgg5OTkGOwdUOg9AY2FsbGVk
+    X2F0SXU6CVRpbWUNCakcwHSqDncJOg1uYW5vX251bWkCHAI6DW5hbm9fZGVu
+    aQY6DXN1Ym1pY3JvIgZUOgl6b25lSSIIVVRDBjsHVDoNQG1haWxib3gwOg9A
+    cXVldWVkX2F0SXU7Dw0JqRzAuC59eAk7EGkCXwI7EWkGOxIiB2BwOxNJIghV
+    VEMGOwdUOg9AaHVuZ3VwX2F0SXU7Dw0JqRzASZ6JeQk7EGkCSwM7EWkGOxIi
+    B4QwOxNJIghVVEMGOwdUOhNAZGlzcGF0Y2hlZF9hdEl1Ow8NCakcwAf50HgJ
+    OxBpAv0COxFpBjsSIgd2UDsTSSIIVVRDBjsHVA==
+  custom: false
+  numbers: true
+- !ruby/struct:LogObject
+  time: 2014-11-08 09:30:24.652643561 Z
+  data: "\x04\bo:\nAgent\f:\b@idi\x06:\n@nameI\"\b999\x06:\x06ET:\f@skills[\x06I\"\nother\x06;\bT:\x0F@languages[\aI\"\ade\x06;\bTI\"\aen\x06;\bT:\x10@visibility:\vonline:\x0E@activity:\vsilent:\r@call_idI\")3d037b28-4808-4e21-8c61-f72b32951e7e\x06;\bT"
   custom: false
   numbers: false
-- !ruby/struct:LogObject
-  time: 2014-10-21 02:16:14.365776532 Z
-  data: !binary |-
-    BAhvOglDYWxsEjoNQGNhbGxfaWRJIikzNDFiMDQ4Yy1lZmQyLTRmYjktOGVk
-    NC04NmRhYzkyNThkNjIGOgZFVDoOQGNhbGxfdGFnSSImU0lQLzEwMS0wMDAw
-    MDAwMyBTSVAvOTk5LTAwMDAwMDAyBjsHVDoPQG9yaWdpbl9pZDA6DkBsYW5n
-    dWFnZUkiB2VzBjsHVDoLQHNraWxsSSIQZXh0X2Jvb2tpbmcGOwdUOg9AZXh0
-    ZW5zaW9uSSIGMAY7B1Q6D0BjYWxsZXJfaWRJIgg5OTkGOwdUOgxAaHVuZ3Vw
-    VDoPQGNhbGxlZF9hdEl1OglUaW1lDaKmHMDaqaY8CToNbmFub19udW1pczoN
-    bmFub19kZW5pBjoNc3VibWljcm8iBhE6CXpvbmVJIghVVEMGOwdUOg1AbWFp
-    bGJveDA6D0BxdWV1ZWRfYXRJdTsQDaKmHMDOit09CTsRaQLXAjsSaQY7EyIH
-    cnA7FEkiCFVUQwY7B1Q6D0BodW5ndXBfYXRJdTsQDaKmHMBIi+VACTsRaQLU
-    AzsSaQY7EyIGmDsUSSIIVVRDBjsHVDoTQGRpc3BhdGNoZWRfYXRJdTsQDaKm
-    HMDucAw+CTsRaQJZATsSaQY7EyIHNFA7FEkiCFVUQwY7B1Q=
-  custom: false
-  numbers: true

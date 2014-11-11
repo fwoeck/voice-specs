@@ -1,6 +1,3 @@
-require 'bundler'
-Bundler.setup
-
 require 'rspec'
 require 'rspec/expectations'
 
@@ -8,12 +5,12 @@ require 'selenium-webdriver'
 require 'capybara/rspec'
 require 'capybara/dsl'
 
-require './spec/spec_helper'
+require 'yaml'
+SpecConfig = YAML.load_file('./config/app.yml')
 
-
-Capybara.app_host    = 'https://33.33.33.100'
-Capybara.run_server  =  false
-Capybara.server_port =  443
+RSpec.configure do |config|
+  config.include Capybara::DSL
+end
 
 Capybara.register_driver :selenium_firefox_driver do |app|
   profile = Selenium::WebDriver::Firefox::Profile.new
@@ -23,4 +20,8 @@ Capybara.register_driver :selenium_firefox_driver do |app|
   Capybara::Selenium::Driver.new(app, browser: :firefox, profile: profile)
 end
 
-Capybara.default_driver = :selenium_firefox_driver
+Capybara.app_host         = "https://#{SpecConfig['hostname']}"
+Capybara.run_server       =  false
+Capybara.server_port      =  443
+Capybara.default_selector = :css
+Capybara.default_driver   = :selenium_firefox_driver

@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require 'bundler'
+Bundler.setup
+
+require './lib/suite/setup'
+require './lib/suite/helpers'
+require './lib/suite/session'
+
+s = Session.new
+s.setup
+s.start
