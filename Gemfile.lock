@@ -22,7 +22,7 @@ GEM
     amq-protocol (1.9.2)
     bson (2.3.0)
     builder (3.2.2)
-    bunny (1.6.2)
+    bunny (1.6.3)
       amq-protocol (>= 1.9.2)
     capybara (2.4.4)
       mime-types (>= 1.16)
