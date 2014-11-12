@@ -4,6 +4,7 @@ class Session
               :agent1_id, :agent2_id, :all_sessions
 
   include Helpers
+  include FormHelpers
   include Capybara::DSL
   include RSpec::Matchers
 
@@ -49,9 +50,8 @@ class Session
     login_as_agent(1)
     login_as_agent(2)
     send_chat_message('Hello!')
-  sleep 30
-  rescue => e
-    raise e
+  rescue RSpec::Expectations::ExpectationNotMetError => e
+    debug_error(e)
   ensure
     Capybara.reset_sessions!
   end

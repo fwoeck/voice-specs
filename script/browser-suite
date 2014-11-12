@@ -5,6 +5,7 @@ Bundler.setup
 
 require './lib/suite/setup'
 require './lib/suite/helpers'
+require './lib/suite/form_helpers'
 require './lib/suite/session'
 
 s = Session.new
