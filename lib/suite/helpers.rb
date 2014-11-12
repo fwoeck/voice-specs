@@ -1,4 +1,7 @@
 module Helpers
+  NA_FORM = 'form#new_agent_form'
+  ALL     = 'Voice.store.all'
+
 
   def wait_for_ajax
     sleep 0.05
@@ -18,6 +21,11 @@ module Helpers
   end
 
 
+  def eval_js(line)
+    page.evaluate_script line
+  end
+
+
   def accept_dialog
     page.execute_script 'Voice.dialogController.accept()'
   end
@@ -25,6 +33,11 @@ module Helpers
 
   def cancel_dialog
     page.execute_script 'Voice.dialogController.cancel()'
+  end
+
+
+  def expect_dialog_message(msg)
+    expect(find '#dialog_wrapper').to have_text msg
   end
 
 
@@ -46,7 +59,7 @@ module Helpers
     fill_in 'user[password]', with: password
     click_button 'Log in' # TODO translate this
 
-    expect(page.evaluate_script('env.userId').to_i).to be > 0
+    expect(eval_js('env.userId').to_i).to be > 0
   end
 
 
@@ -92,7 +105,7 @@ module Helpers
     click_link(t name)
     sleep 0.1
     expect(
-      page.evaluate_script "Voice.get('currentPath')"
+      eval_js "Voice.get('currentPath')"
     ).to eql path
   end
 
@@ -100,7 +113,7 @@ module Helpers
   def open_new_agent_form
     page.find('#new_agent').click
     sleep 0.1
-    expect(page).to have_css('form#new_agent_form')
+    expect(page).to have_css(NA_FORM)
   end
 
 
@@ -114,8 +127,8 @@ module Helpers
 
 
   def get_agent_id_for(num)
-    page.evaluate_script(
-      "Voice.store.all('user').findProperty('name', '#{agents[num][:ext]}').get('id')"
+    eval_js(
+      "#{ALL}('user').findProperty('name', '#{agents[num][:ext]}').get('id')"
     ).to_i
   end
 
@@ -127,7 +140,7 @@ module Helpers
       ['extension',    agents[num][:ext]],
       ['confirmation', agents[num][:pass]]
     ].each { |key, val|
-      find('form#new_agent_form').fill_in key, with: val
+      find(NA_FORM).fill_in key, with: val
     }
   end
 
@@ -137,18 +150,18 @@ module Helpers
       arr << agents[num][:langs].map  { |val| [val.upcase, 'languages'] }
       arr << agents[num][:skills].map { |val| [translation_for_skill(val), 'skills'] }
     }.flatten(1).each { |key, val|
-      find('form#new_agent_form').select key, from: val
+      find(NA_FORM).select key, from: val
     }
   end
 
 
   def translation_for_skill(val)
-    page.evaluate_script("env.skills.#{val}[env.locale]")
+    eval_js("env.skills.#{val}[env.locale]")
   end
 
 
   def confirm_new_agent_form
-    find('form#new_agent_form').click_button t('domain.save_profile')
+    find(NA_FORM).click_button t('domain.save_profile')
     wait_for_ajax
     accept_dialog
   end
@@ -177,6 +190,51 @@ module Helpers
   end
 
 
+  def check_form_validation
+    fillin_fields_for_agent 1
+    fillin_invalid_email
+    fillin_duplicate_email
+    clear_new_agent_form
+  end
+
+
+  def fillin_invalid_email
+    find(NA_FORM).fill_in 'email', with: 'invalid.email'
+    find(NA_FORM).click_button t('domain.save_profile')
+
+    expect_dialog_message t('dialog.form_with_errors')
+    accept_dialog
+  end
+
+
+  def fillin_duplicate_email
+    find(NA_FORM).fill_in 'email', with: 'valid@email.com'
+    find(NA_FORM).click_button t('domain.save_profile')
+
+    expect_dialog_message 'SIP Extension has already been taken'
+    accept_dialog
+  end
+
+
+  def clear_new_agent_form
+    expect(new_agent_fullname_field).to eql(agents[1][:name])
+    find(NA_FORM).click_button t('domain.clear')
+
+    expect(new_agent_fullname_field).to eql('')
+    expect(user_count).to eql(4)
+  end
+
+
+  def user_count
+    eval_js "#{ALL}('user').get('length')"
+  end
+
+
+  def new_agent_fullname_field
+    find("#{NA_FORM} input[name='fullName']").value
+  end
+
+
   def send_chat_message(msg)
     activate_dashboard
     fill_in 'chat_message', with: msg + "\n"
@@ -184,7 +242,7 @@ module Helpers
     all_sessions.each { |num|
       use_client num
       expect(
-        page.evaluate_script "Voice.store.all('chatMessage').get('firstObject.content')"
+        eval_js "#{ALL}('chatMessage').get('firstObject.content')"
       ).to eql msg
     }
   end

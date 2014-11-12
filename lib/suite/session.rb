@@ -45,12 +45,13 @@ class Session
   def start
     login_as_admin
     create_agents
+    check_form_validation
     login_as_agent(1)
     login_as_agent(2)
     send_chat_message('Hello!')
   sleep 30
   rescue => e
-    puts e.message
+    raise e
   ensure
     Capybara.reset_sessions!
   end
