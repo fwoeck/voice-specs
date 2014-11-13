@@ -4,6 +4,7 @@ class Session
               :agent1_id, :agent2_id, :all_sessions
 
   include Helpers
+  include FormHelpers
   include Capybara::DSL
   include RSpec::Matchers
 
@@ -42,16 +43,26 @@ class Session
   end
 
 
+  def read_exit_confirmation
+    return if ENV['BATCH_RUN']
+    puts 'Press <CR> to close all sessions and exit.'
+    STDIN.gets
+  end
+
+
   def start
     login_as_admin
     create_agents
+    check_form_validation
     login_as_agent(1)
     login_as_agent(2)
-    send_chat_message('Hello!')
-  sleep 30
-  rescue => e
-    puts e.message
+    send_chat_message
+    update_my_settings_as(1)
+    as_admin_update_agent(1)
+  rescue RSpec::Expectations::ExpectationNotMetError => e
+    debug_error(e)
   ensure
+    read_exit_confirmation
     Capybara.reset_sessions!
   end
 end

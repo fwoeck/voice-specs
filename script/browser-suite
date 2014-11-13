@@ -5,8 +5,15 @@ Bundler.setup
 
 require './lib/suite/setup'
 require './lib/suite/helpers'
+require './lib/suite/form_helpers'
 require './lib/suite/session'
 
-s = Session.new
-s.setup
-s.start
+if (SpecConfig['rails_env'] != 'development') && !ENV['FORCE_SUITE']
+  puts 'Running these specs will wipe all databases.'
+  puts 'If you really want to do this, start the script via:'
+  puts '> FORCE_SUITE=1 script/browser-suite'
+else
+  s = Session.new
+  s.setup
+  s.start
+end

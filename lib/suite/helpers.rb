@@ -1,3 +1,8 @@
+ALL    = 'Voice.store.all'
+GET    = 'Voice.store.getById'
+DIALOG = 'Voice.dialogController'
+
+
 module Helpers
 
   def wait_for_ajax
@@ -13,18 +18,54 @@ module Helpers
   end
 
 
+  def expect_with_retry(val, n=3, &block)
+    expect(block.call).to eql val
+  rescue RSpec::Expectations::ExpectationNotMetError => e
+    sleep 0.2
+    n -= 1
+    n > 0 ? retry : raise(e)
+  end
+
+
+  def debug_error(err, timeout=180)
+    puts err.message
+    puts err.backtrace
+    sleep timeout
+  end
+
+
   def t(key)
     page.evaluate_script("i18n.#{key}")
   end
 
 
-  def accept_dialog
-    page.execute_script 'Voice.dialogController.accept()'
+  def eval_js(line)
+    page.evaluate_script line
+  end
+
+
+  def wait_for_active_dialog
+    Timeout.timeout(Capybara.default_wait_time) do
+      loop until eval_js "#{DIALOG}.get('isActive')"
+    end
+  end
+
+
+  def accept_dialog(check=true)
+    wait_for_active_dialog if check
+    page.execute_script "#{DIALOG}.accept()"
   end
 
 
   def cancel_dialog
-    page.execute_script 'Voice.dialogController.cancel()'
+    wait_for_active_dialog
+    page.execute_script "#{DIALOG}.cancel()"
+  end
+
+
+  def expect_dialog_message(msg)
+    wait_for_active_dialog
+    expect(find '#dialog_wrapper').to have_text msg
   end
 
 
@@ -37,7 +78,7 @@ module Helpers
   def use_client(num)
     all_sessions.add num
     Capybara.session_name = num
-    sleep 0.1
+    sleep 0.5
   end
 
 
@@ -46,7 +87,7 @@ module Helpers
     fill_in 'user[password]', with: password
     click_button 'Log in' # TODO translate this
 
-    expect(page.evaluate_script('env.userId').to_i).to be > 0
+    expect(eval_js('env.userId').to_i).to be > 0
   end
 
 
@@ -92,65 +133,22 @@ module Helpers
     click_link(t name)
     sleep 0.1
     expect(
-      page.evaluate_script "Voice.get('currentPath')"
+      eval_js "Voice.get('currentPath')"
     ).to eql path
   end
 
 
-  def open_new_agent_form
-    page.find('#new_agent').click
-    sleep 0.1
-    expect(page).to have_css('form#new_agent_form')
-  end
-
-
-  def create_agent(num)
-    fillin_fields_for_agent(num)
-    set_selections_for_agent(num)
-    confirm_new_agent_form
-
-    get_agent_id_for(num).tap { |aid| expect(aid).to be > 1 }
-  end
-
-
   def get_agent_id_for(num)
-    page.evaluate_script(
-      "Voice.store.all('user').findProperty('name', '#{agents[num][:ext]}').get('id')"
-    ).to_i
-  end
+    expect(aid = eval_js(
+      "#{ALL}('user').findProperty('name', '#{agents[num][:ext]}').get('id')"
+    ).to_i).to be > 1
 
-
-  def fillin_fields_for_agent(num)
-    [ ['email',        agents[num][:email]],
-      ['fullName',     agents[num][:name]],
-      ['password',     agents[num][:pass]],
-      ['extension',    agents[num][:ext]],
-      ['confirmation', agents[num][:pass]]
-    ].each { |key, val|
-      find('form#new_agent_form').fill_in key, with: val
-    }
-  end
-
-
-  def set_selections_for_agent(num)
-    [[['Agent', 'roles']]].tap { |arr|
-      arr << agents[num][:langs].map  { |val| [val.upcase, 'languages'] }
-      arr << agents[num][:skills].map { |val| [translation_for_skill(val), 'skills'] }
-    }.flatten(1).each { |key, val|
-      find('form#new_agent_form').select key, from: val
-    }
+    [num, aid]
   end
 
 
   def translation_for_skill(val)
-    page.evaluate_script("env.skills.#{val}[env.locale]")
-  end
-
-
-  def confirm_new_agent_form
-    find('form#new_agent_form').click_button t('domain.save_profile')
-    wait_for_ajax
-    accept_dialog
+    eval_js("env.skills.#{val}[env.locale]")
   end
 
 
@@ -168,24 +166,38 @@ module Helpers
   end
 
 
-  def create_agents
-    activate_agents_tab
-    open_new_agent_form
-
-    @agent1_id = create_agent(1)
-    @agent2_id = create_agent(2)
+  def user_count
+    eval_js "#{ALL}('user').get('length')"
   end
 
 
-  def send_chat_message(msg)
+  def ui_locales
+    eval_js "env.uiLocales"
+  end
+
+
+  def current_locale
+    eval_js "env.locale"
+  end
+
+
+  def with_all_sessions(&block)
+    all_sessions.each do |num|
+      use_client num
+      block.call
+    end
+  end
+
+
+  def send_chat_message(msg='Hello chat!')
+    use_client admin_name
     activate_dashboard
     fill_in 'chat_message', with: msg + "\n"
 
-    all_sessions.each { |num|
-      use_client num
+    with_all_sessions do |num|
       expect(
-        page.evaluate_script "Voice.store.all('chatMessage').get('firstObject.content')"
-      ).to eql msg
-    }
+        eval_js "#{ALL}('chatMessage').get('firstObject.content')"
+      ).to eql(msg)
+    end
   end
 end

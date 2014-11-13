@@ -31,8 +31,8 @@ class DbCleaner
     system "mongo #{mongodb} --eval 'db.dropDatabase();' >/dev/null"
     system "curl -s -XDELETE 'http://#{el_host}:#{el_port}/_all/' >/dev/null"
     system "mysql -u#{mysql_user} -p#{mysql_pass} -Nse 'show tables' #{mysql_db} | grep -v schema_migrations | while read table; do mysql -u#{mysql_user} -p#{mysql_pass} -e \"truncate table $table\" #{mysql_db}; done"
-    system "sudo sv force-restart /etc/service/* >/dev/null"
     system "BUNDLE_GEMFILE='' bash -l -c 'cd #{rails_base}; rake db:mongoid:create_indexes voice:seed_admin_user >/dev/null'"
+    system "sudo sv force-restart /etc/service/voice-* >/dev/null"
   end
 
 
