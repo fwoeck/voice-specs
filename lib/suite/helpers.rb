@@ -1,5 +1,7 @@
+POS    =  Struct.new(:x, :y)
 ALL    = 'Voice.store.all'
 GET    = 'Voice.store.getById'
+POS_N  = [0, 1, 2, 3, 4, 5].cycle
 DIALOG = 'Voice.dialogController'
 
 
@@ -27,10 +29,9 @@ module Helpers
   end
 
 
-  def debug_error(err, timeout=180)
+  def debug_error(err)
     puts err.message
     puts err.backtrace
-    sleep timeout
   end
 
 
@@ -92,8 +93,11 @@ module Helpers
 
 
   def resize_browser(width, height)
+    pos    = POS_N.next
     window = Capybara.current_session.driver.browser.manage.window
+
     window.resize_to(width, height)
+    window.position = POS.new(10 + 200 * pos, 40 + 100 * pos)
   end
 
 
@@ -199,5 +203,24 @@ module Helpers
         eval_js "#{ALL}('chatMessage').get('firstObject.content')"
       ).to eql(msg)
     end
+  end
+
+
+  def check_user_record_for(num, name=nil)
+    aid = agents[num][:id]
+
+    with_all_sessions do
+      expect(eval_js "#{GET}('user', #{aid}).get('fullName')").to eql(name) if name
+      check_user_validity_for(aid)
+    end
+  end
+
+
+  def check_user_validity_for(aid)
+    [ ['isNew',    false], ['isDirty', false],
+      ['isLoaded', true],  ['isValid', true]
+    ].each { |key, val|
+      expect(eval_js "#{GET}('user', #{aid}).get('#{key}')" ).to eql(val)
+    }
   end
 end

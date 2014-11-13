@@ -154,17 +154,6 @@ module FormHelpers
     open_my_settings
     find(MS_FORM).fill_in 'fullName', with: new_name
     submit_form(MS_FORM, false)
-    check_user_validity_for(num, new_name)
-  end
-
-
-  def check_user_validity_for(num, name)
-    aid = agents[num][:id]
-
-    with_all_sessions do
-      expect(eval_js "#{GET}('user', #{aid}).get('fullName')").to eql(name)
-      expect(eval_js "#{GET}('user', #{aid}).get('isLoaded')").to be true
-      expect(eval_js "#{GET}('user', #{aid}).get('isDirty')" ).to be false
-    end
+    check_user_record_for(num, new_name)
   end
 end
