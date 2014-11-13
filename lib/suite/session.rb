@@ -45,8 +45,13 @@ class Session
 
   def read_exit_confirmation
     return if ENV['BATCH_RUN']
-    puts 'Press <CR> to close all sessions and exit.'
-    STDIN.gets
+
+    if ENV['RUN_PRY']
+      binding.pry
+    else
+      puts 'Press a key to close all sessions and exit.'
+      STDIN.getch
+    end
   end
 
 
