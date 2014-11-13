@@ -3,6 +3,9 @@ module FormHelpers
   NA_FORM = 'form#new_agent_form'
   MS_FORM = 'form#current_user_form'
 
+  AGENT_PANELS = '#agent_table_wrapper .jspPane > .ember-view'
+  FIRST_AGENT  = "#{AGENT_PANELS} > .agent"
+
 
   def open_new_agent_form
     page.find('#new_agent').click
@@ -113,11 +116,32 @@ module FormHelpers
   end
 
 
-  def as_admin_update_agent(num)
+  def as_admin_grant_agent(num)
     use_client admin_name
     activate_agents_tab
+    filter_for_agent(num)
+    give_admin_role_to(num)
+  end
+
+
+  def as_admin_revoke_agent(num)
     # TODO
-    #   user agent filter, add admin role, check other browsers
+    # revoke admin role from agent
+  end
+
+
+  def filter_for_agent(num)
+    expect(page.all(AGENT_PANELS).size).to eql(3)
+    find('#agent_table').fill_in 'agent_search', with: agents[num][:ext]
+    sleep 0.5
+    expect(page.all(AGENT_PANELS).size).to eql(1)
+  end
+
+
+  def give_admin_role_to(num)
+    find(FIRST_AGENT).click
+    expect(page).to have_css("form#agent_form_#{agents[num][:id]}")
+    # TODO ...
   end
 
 

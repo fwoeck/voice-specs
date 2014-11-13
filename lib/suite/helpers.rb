@@ -32,6 +32,7 @@ module Helpers
   def debug_error(err)
     puts err.message
     puts err.backtrace
+    read_exit_confirmation
   end
 
 
