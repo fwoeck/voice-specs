@@ -1,5 +1,7 @@
 module FormHelpers
+
   NA_FORM = 'form#new_agent_form'
+  MS_FORM = 'form#current_user_form'
 
 
   def open_new_agent_form
@@ -12,9 +14,9 @@ module FormHelpers
   def create_agent(num)
     fillin_fields_for_agent(num)
     set_selections_for_agent(num)
-    confirm_new_agent_form
 
-    get_agent_id_for(num).tap { |aid| expect(aid).to be > 1 }
+    confirm_new_agent_form
+    get_agent_id_for(num)
   end
 
 
@@ -40,10 +42,15 @@ module FormHelpers
   end
 
 
-  def confirm_new_agent_form
-    find(NA_FORM).click_button t('domain.save_profile')
+  def submit_form(form, check=true)
+    find(form).click_button t('domain.save_profile')
     wait_for_ajax
-    accept_dialog
+    accept_dialog(check)
+  end
+
+
+  def confirm_new_agent_form
+    submit_form(NA_FORM)
   end
 
 
@@ -51,8 +58,10 @@ module FormHelpers
     activate_agents_tab
     open_new_agent_form
 
-    @agent1_id = create_agent(1)
-    @agent2_id = create_agent(2)
+    [1, 2].each { |n|
+      num, aid = create_agent(n)
+      agents[num][:id] = aid
+    }
   end
 
 
@@ -93,5 +102,69 @@ module FormHelpers
 
   def new_agent_fullname_field
     find("#{NA_FORM} input[name='fullName']").value
+  end
+
+
+  def update_my_settings_as(num)
+    use_client agents[num][:ext]
+    activate_agents_tab
+    change_ui_locale
+    update_agent_name_for(num)
+  end
+
+
+  def as_admin_update_agent(num)
+    use_client admin_name
+    activate_agents_tab
+    # TODO
+    #   user agent filter, add admin role, check other browsers
+  end
+
+
+  def change_ui_locale
+    cl = current_locale
+    return unless nl = (ui_locales - [cl]).sample
+
+    [nl, cl].each { |loc|
+      open_my_settings
+      choose_ui_locale(loc)
+    }
+  end
+
+
+  def open_my_settings
+    find('#my_config').click
+    expect(page).to have_css(MS_FORM)
+  end
+
+
+  def choose_ui_locale(loc)
+    find(MS_FORM).select loc, from: 'locale'
+    submit_form(MS_FORM)
+    sleep 1
+
+    expect(eval_js 'env.locale').to eql(loc)
+    expect(find('#logout_link a').text).to eql t('domain.logout')
+  end
+
+
+  def update_agent_name_for(num)
+    new_name = agents[num][:name] + ' II'
+
+    open_my_settings
+    find(MS_FORM).fill_in 'fullName', with: new_name
+    submit_form(MS_FORM, false)
+    check_user_validity_for(num, new_name)
+  end
+
+
+  def check_user_validity_for(num, name)
+    aid = agents[num][:id]
+
+    with_all_sessions do
+      expect(eval_js "#{GET}('user', #{aid}).get('fullName')").to eql(name)
+      expect(eval_js "#{GET}('user', #{aid}).get('isLoaded')").to be true
+      expect(eval_js "#{GET}('user', #{aid}).get('isDirty')" ).to be false
+    end
   end
 end

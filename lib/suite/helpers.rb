@@ -1,6 +1,9 @@
-module Helpers
-  ALL = 'Voice.store.all'
+ALL    = 'Voice.store.all'
+GET    = 'Voice.store.getById'
+DIALOG = 'Voice.dialogController'
 
+
+module Helpers
 
   def wait_for_ajax
     sleep 0.05
@@ -41,17 +44,27 @@ module Helpers
   end
 
 
-  def accept_dialog
-    page.execute_script 'Voice.dialogController.accept()'
+  def wait_for_active_dialog
+    Timeout.timeout(Capybara.default_wait_time) do
+      loop until eval_js "#{DIALOG}.get('isActive')"
+    end
+  end
+
+
+  def accept_dialog(check=true)
+    wait_for_active_dialog if check
+    page.execute_script "#{DIALOG}.accept()"
   end
 
 
   def cancel_dialog
-    page.execute_script 'Voice.dialogController.cancel()'
+    wait_for_active_dialog
+    page.execute_script "#{DIALOG}.cancel()"
   end
 
 
   def expect_dialog_message(msg)
+    wait_for_active_dialog
     expect(find '#dialog_wrapper').to have_text msg
   end
 
@@ -126,9 +139,11 @@ module Helpers
 
 
   def get_agent_id_for(num)
-    eval_js(
+    expect(aid = eval_js(
       "#{ALL}('user').findProperty('name', '#{agents[num][:ext]}').get('id')"
-    ).to_i
+    ).to_i).to be > 1
+
+    [num, aid]
   end
 
 
@@ -156,12 +171,30 @@ module Helpers
   end
 
 
-  def send_chat_message(msg)
+  def ui_locales
+    eval_js "env.uiLocales"
+  end
+
+
+  def current_locale
+    eval_js "env.locale"
+  end
+
+
+  def with_all_sessions(&block)
+    all_sessions.each do |num|
+      use_client num
+      block.call
+    end
+  end
+
+
+  def send_chat_message(msg='Hello chat!')
+    use_client admin_name
     activate_dashboard
     fill_in 'chat_message', with: msg + "\n"
 
-    all_sessions.each do |num|
-      use_client num
+    with_all_sessions do |num|
       expect(
         eval_js "#{ALL}('chatMessage').get('firstObject.content')"
       ).to eql(msg)
