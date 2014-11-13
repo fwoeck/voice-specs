@@ -70,7 +70,7 @@ class Session
     as_admin_revoke_agent(2)
 
     read_exit_confirmation
-  rescue RSpec::Expectations::ExpectationNotMetError => e
+  rescue => e
     debug_error(e)
   ensure
     Capybara.reset_sessions!

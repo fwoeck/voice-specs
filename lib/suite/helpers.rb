@@ -42,7 +42,12 @@ module Helpers
 
 
   def eval_js(line)
-    page.evaluate_script line
+    page.evaluate_script "Ember.run(function () { return #{line}; })"
+  end
+
+
+  def exec_js(line)
+    page.execute_script "Ember.run(function () { #{line}; })"
   end
 
 
@@ -55,13 +60,13 @@ module Helpers
 
   def accept_dialog(check=true)
     wait_for_active_dialog if check
-    page.execute_script "#{DIALOG}.accept()"
+    exec_js "#{DIALOG}.accept()"
   end
 
 
   def cancel_dialog
     wait_for_active_dialog
-    page.execute_script "#{DIALOG}.cancel()"
+    exec_js "#{DIALOG}.cancel()"
   end
 
 
