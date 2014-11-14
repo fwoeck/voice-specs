@@ -1,0 +1,12 @@
+#!/bin/zsh
+set -e
+
+echo "This will create lots of fake-agents and -customers."
+read -q "resp1?Should we proceed? [y/N] "
+if [[ $resp1 =~ ^(Y|y)$ ]]; then
+  echo
+  echo "Creating 30 agents.."
+  curl -s 'https://127.0.0.1/seed/agents?count=30' >/dev/null
+  echo "Creating 1000 customers.."
+  curl -s 'https://127.0.0.1/seed/customers?count=1000' >/dev/null
+fi
