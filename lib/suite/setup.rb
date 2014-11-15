@@ -1,4 +1,6 @@
+require 'pry'
 require 'rspec'
+require 'io/console'
 require 'rspec/expectations'
 
 require 'selenium-webdriver'

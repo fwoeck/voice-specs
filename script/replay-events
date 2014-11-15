@@ -11,8 +11,7 @@
 # > script/replay-events 100
 #
 # You may want to create some fake agents/customers before you start:
-# > curl 'https://127.0.0.1/seed/agents?count=30'
-# > curl 'https://127.0.0.1/seed/customers?count=1000'
+# > script/create-fake-agents
 #
 # When you login as admin or with the agent's credentials you will
 # see the calls being queued and received.
