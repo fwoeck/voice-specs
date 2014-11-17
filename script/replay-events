@@ -7,11 +7,11 @@
 # actual SIP calls, so VoIP-related features as hangup/transfer
 # are not possible.
 #
-# Invoke it with the number of calls to be made:
-# > script/replay-events 100
-#
 # You may want to create some fake agents/customers before you start:
 # > script/create-fake-agents
+#
+# Invoke it with the number of calls to be made:
+# > script/replay-events 100
 #
 # When you login as admin or with the agent's credentials you will
 # see the calls being queued and received.
