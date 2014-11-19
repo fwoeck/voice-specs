@@ -36,7 +36,7 @@ module FormHelpers
 
 
   def set_selections_for_agent(num)
-    [[['Agent', 'roles']]].tap { |arr|
+    [[[eval_js('env.roles.agent'), 'roles']]].tap { |arr|
       arr << agents[num][:langs].map  { |val| [val.upcase, 'languages'] }
       arr << agents[num][:skills].map { |val| [translation_for_skill(val), 'skills'] }
     }.flatten(1).each { |key, val|
@@ -45,7 +45,7 @@ module FormHelpers
   end
 
 
-  def submit_form(form, check=true)
+  def submit_form(form, check=false)
     find(form).click_button t('domain.save_profile')
     wait_for_ajax
     accept_dialog(check)
@@ -53,7 +53,7 @@ module FormHelpers
 
 
   def confirm_new_agent_form
-    submit_form(NA_FORM)
+    submit_form(NA_FORM, :check)
   end
 
 
@@ -121,12 +121,14 @@ module FormHelpers
     activate_agents_tab
     filter_for_agent(num)
     give_admin_role_to(num)
+    check_admin_role_for(num)
   end
 
 
   def as_admin_revoke_agent(num)
-    # TODO
-    # revoke admin role from agent
+    use_client admin_name
+    revoke_admin_role_from(num)
+    check_no_admin_role_for(num)
   end
 
 
@@ -140,8 +142,39 @@ module FormHelpers
 
   def give_admin_role_to(num)
     find(FIRST_AGENT).click
-    expect(page).to have_css("form#agent_form_#{agents[num][:id]}")
-    # TODO ...
+    expect(page).to have_css(agent_form_for num)
+
+    find(agent_form_for num).select eval_js('env.roles.admin'), from: 'roles'
+    submit_form(agent_form_for num)
+  end
+
+
+  def revoke_admin_role_from(num)
+    find(agent_form_for num).unselect eval_js('env.roles.admin'), from: 'roles'
+    submit_form(agent_form_for num)
+  end
+
+
+  def agent_form_for(num)
+    "form#agent_form_#{agents[num][:id]}"
+  end
+
+
+  def check_admin_role_for(num)
+    use_client agents[num][:ext]
+    activate_agents_tab
+
+    expect(page).to have_css('#new_agent')
+    expect(eval_js "Voice.get('currentUser.roles')").to eql ['admin', 'agent']
+  end
+
+
+  def check_no_admin_role_for(num)
+    use_client agents[num][:ext]
+    activate_agents_tab
+
+    expect(page).not_to have_css('#new_agent')
+    expect(eval_js "Voice.get('currentUser.roles')").to eql ['agent']
   end
 
 
@@ -164,7 +197,7 @@ module FormHelpers
 
   def choose_ui_locale(loc)
     find(MS_FORM).select loc, from: 'locale'
-    submit_form(MS_FORM)
+    submit_form(MS_FORM, :check)
     sleep 1
 
     expect(eval_js 'env.locale').to eql(loc)
@@ -177,7 +210,7 @@ module FormHelpers
 
     open_my_settings
     find(MS_FORM).fill_in 'fullName', with: new_name
-    submit_form(MS_FORM, false)
+    submit_form(MS_FORM)
     check_user_record_for(num, new_name)
   end
 end

@@ -58,7 +58,7 @@ module Helpers
   end
 
 
-  def accept_dialog(check=true)
+  def accept_dialog(check=false)
     wait_for_active_dialog if check
     exec_js "#{DIALOG}.accept()"
   end
