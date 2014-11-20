@@ -7,6 +7,11 @@ DIALOG = 'Voice.dialogController'
 
 module Helpers
 
+  def log(text)
+    puts "#{Time.now.utc} :: #{text}" unless ENV['BATCH_RUN']
+  end
+
+
   def wait_for_ajax
     sleep 0.05
     Timeout.timeout(Capybara.default_wait_time) do
@@ -41,8 +46,10 @@ module Helpers
   end
 
 
-  def eval_js(line)
-    page.evaluate_script "Ember.run(function () { return #{line}; })"
+  def eval_js(line, silent=false)
+    page.evaluate_script("Ember.run(function () { return #{line}; })").tap { |res|
+      log "Eval #{line} == #{res}" unless silent
+    }
   end
 
 
@@ -53,36 +60,46 @@ module Helpers
 
   def wait_for_active_dialog
     Timeout.timeout(Capybara.default_wait_time) do
-      loop until eval_js "#{DIALOG}.get('isActive')"
+      loop until eval_js("#{DIALOG}.get('isActive')", :silent)
     end
   end
 
 
   def accept_dialog(check=false)
+    log 'Accept the dialog.'
+
     wait_for_active_dialog if check
     exec_js "#{DIALOG}.accept()"
   end
 
 
   def cancel_dialog
+    log 'Cancel the dialog.'
+
     wait_for_active_dialog
     exec_js "#{DIALOG}.cancel()"
   end
 
 
   def expect_dialog_message(msg)
+    log "Expect the dialog to say \"#{msg}\"."
+
     wait_for_active_dialog
     expect(find '#dialog_wrapper').to have_text msg
   end
 
 
   def visit_home_url
+    log 'Visit the root url.'
+
     visit '/'
     resize_browser(1100, 900)
   end
 
 
   def use_client(num)
+    log "Use the browser session #{num}."
+
     all_sessions.add num
     Capybara.session_name = num
     sleep 0.5
@@ -90,6 +107,8 @@ module Helpers
 
 
   def login_as(email, password='P4ssw0rd')
+    log "Login with the email address #{email}."
+
     fill_in 'user[email]',    with: email
     fill_in 'user[password]', with: password
     click_button 'Log in' # TODO translate this
@@ -108,11 +127,13 @@ module Helpers
 
 
   def wipe_dbs
+    log 'Prepare the database environment.'
     system 'CONFIRM_DELETE=1 ./script/wipe-all-dbs'
   end
 
 
   def wait_for_puma
+    log 'Wait for the web server.'
     while `lsof -i :#{SpecConfig['puma_port']} | grep LISTEN | wc -l`.to_i < 1
       sleep 1
     end
@@ -120,21 +141,25 @@ module Helpers
 
 
   def activate_dashboard
+    log 'Activate the Dashboard.'
     activate_tab_for('headers.dashboard', 'index')
   end
 
 
   def activate_customers_tab
+    log 'Activate the Customers tab.'
     activate_tab_for('headers.customers', 'customers')
   end
 
 
   def activate_agents_tab
+    log 'Activate the Agent List.'
     activate_tab_for('headers.agent_list', 'agents')
   end
 
 
   def activate_statistics_tab
+    log 'Activate the Call Statistics.'
     activate_tab_for('headers.call_statistics', 'stats')
   end
 
@@ -158,7 +183,7 @@ module Helpers
 
 
   def translation_for_skill(val)
-    eval_js("env.skills.#{val}[env.locale]")
+    eval_js("env.skills.#{val}[env.locale]", :silent)
   end
 
 
@@ -182,12 +207,12 @@ module Helpers
 
 
   def ui_locales
-    eval_js "env.uiLocales"
+    eval_js('env.uiLocales', :silent)
   end
 
 
   def current_locale
-    eval_js "env.locale"
+    eval_js('env.locale', :silent)
   end
 
 
@@ -202,6 +227,12 @@ module Helpers
   def send_chat_message(msg='Hello chat!')
     use_client admin_name
     activate_dashboard
+    fillin_chat_input_with(msg)
+  end
+
+
+  def fillin_chat_input_with(msg)
+    log "Send a chat message with \"#{msg}\"."
     fill_in 'chat_message', with: msg + "\n"
 
     with_all_sessions do |num|
