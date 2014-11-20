@@ -46,9 +46,14 @@ module Helpers
   end
 
 
-  def eval_js(line, silent=false)
+  def expect_js(line)
+    eval_js(line, :logging)
+  end
+
+
+  def eval_js(line, logging=false)
     page.evaluate_script("Ember.run(function () { return #{line}; })").tap { |res|
-      log "Eval #{line} == #{res}" unless silent
+      log "Eval #{line} == #{res}" if logging
     }
   end
 
@@ -60,7 +65,7 @@ module Helpers
 
   def wait_for_active_dialog
     Timeout.timeout(Capybara.default_wait_time) do
-      loop until eval_js("#{DIALOG}.get('isActive')", :silent)
+      loop until eval_js("#{DIALOG}.get('isActive')")
     end
   end
 
@@ -113,7 +118,7 @@ module Helpers
     fill_in 'user[password]', with: password
     click_button 'Log in' # TODO translate this
 
-    expect(eval_js('env.userId').to_i).to be > 0
+    expect(expect_js('env.userId').to_i).to be > 0
   end
 
 
@@ -168,13 +173,13 @@ module Helpers
     click_link(t name)
     sleep 0.1
     expect(
-      eval_js "Voice.get('currentPath')"
+      expect_js "Voice.get('currentPath')"
     ).to eql path
   end
 
 
   def get_agent_id_for(num)
-    expect(aid = eval_js(
+    expect(aid = expect_js(
       "#{ALL}('user').findProperty('name', '#{agents[num][:ext]}').get('id')"
     ).to_i).to be > 1
 
@@ -183,7 +188,7 @@ module Helpers
 
 
   def translation_for_skill(val)
-    eval_js("env.skills.#{val}[env.locale]", :silent)
+    eval_js("env.skills.#{val}[env.locale]")
   end
 
 
@@ -202,17 +207,17 @@ module Helpers
 
 
   def user_count
-    eval_js "#{ALL}('user').get('length')"
+    expect_js "#{ALL}('user').get('length')"
   end
 
 
   def ui_locales
-    eval_js('env.uiLocales', :silent)
+    eval_js('env.uiLocales')
   end
 
 
   def current_locale
-    eval_js('env.locale', :silent)
+    eval_js('env.locale')
   end
 
 
@@ -237,7 +242,7 @@ module Helpers
 
     with_all_sessions do |num|
       expect(
-        eval_js "#{ALL}('chatMessage').get('firstObject.content')"
+        expect_js "#{ALL}('chatMessage').get('firstObject.content')"
       ).to eql(msg)
     end
   end
@@ -247,7 +252,7 @@ module Helpers
     aid = agents[num][:id]
 
     with_all_sessions do
-      expect(eval_js "#{GET}('user', #{aid}).get('fullName')").to eql(name) if name
+      expect(expect_js "#{GET}('user', #{aid}).get('fullName')").to eql(name) if name
       check_user_validity_for(aid)
     end
   end
@@ -257,7 +262,7 @@ module Helpers
     [ ['isNew',    false], ['isDirty', false],
       ['isLoaded', true],  ['isValid', true]
     ].each { |key, val|
-      expect(eval_js "#{GET}('user', #{aid}).get('#{key}')" ).to eql(val)
+      expect(expect_js "#{GET}('user', #{aid}).get('#{key}')" ).to eql(val)
     }
   end
 end

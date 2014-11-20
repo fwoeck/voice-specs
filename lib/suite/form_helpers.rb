@@ -42,7 +42,7 @@ module FormHelpers
   def set_selections_for_agent(num)
     log "Set some selections for agent #{num}."
 
-    [[[eval_js('env.roles.agent', :silent), 'roles']]].tap { |arr|
+    [[[eval_js('env.roles.agent'), 'roles']]].tap { |arr|
       arr << agents[num][:langs].map  { |val| [val.upcase, 'languages'] }
       arr << agents[num][:skills].map { |val| [translation_for_skill(val), 'skills'] }
     }.flatten(1).each { |key, val|
@@ -162,7 +162,7 @@ module FormHelpers
     find(FIRST_AGENT).click
     expect(page).to have_css(agent_form_for num)
 
-    find(agent_form_for num).select eval_js('env.roles.admin', :silent), from: 'roles'
+    find(agent_form_for num).select eval_js('env.roles.admin'), from: 'roles'
     submit_form(agent_form_for num)
   end
 
@@ -170,7 +170,7 @@ module FormHelpers
   def revoke_admin_role_from(num)
     log "Revoke the admin-role from agent #{num}."
 
-    find(agent_form_for num).unselect eval_js('env.roles.admin', :silent), from: 'roles'
+    find(agent_form_for num).unselect eval_js('env.roles.admin'), from: 'roles'
     submit_form(agent_form_for num)
   end
 
@@ -185,7 +185,7 @@ module FormHelpers
     activate_agents_tab
 
     expect(page).to have_css('#new_agent')
-    expect(eval_js "Voice.get('currentUser.roles')").to eql ['admin', 'agent']
+    expect(expect_js "Voice.get('currentUser.roles')").to eql ['admin', 'agent']
   end
 
 
@@ -194,7 +194,7 @@ module FormHelpers
     activate_agents_tab
 
     expect(page).not_to have_css('#new_agent')
-    expect(eval_js "Voice.get('currentUser.roles')").to eql ['agent']
+    expect(expect_js "Voice.get('currentUser.roles')").to eql ['agent']
   end
 
 
@@ -224,7 +224,7 @@ module FormHelpers
     submit_form(MS_FORM, :check)
     sleep 1
 
-    expect(eval_js 'env.locale').to eql(loc)
+    expect(expect_js 'env.locale').to eql(loc)
     expect(find('#logout_link a').text).to eql t('domain.logout')
   end
 
