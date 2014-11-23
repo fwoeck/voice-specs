@@ -25,7 +25,17 @@ end
 
 Capybara.register_driver :selenium_chrome do |app|
   Capybara::Selenium::Driver.new(app, {browser: :chrome,
-    switches: %w[--ignore-certificate-errors --disable-translate --use-fake-device-for-media-stream --disable-user-media-security]
+    switches: [
+      '--allow-file-access',
+      '--disable-translate',
+      '--always-authorize-plugins',
+      '--ignore-certificate-errors',
+      '--disable-user-media-security',
+      '--use-fake-device-for-media-stream',
+      '--disable-extensions-file-access-check',
+      '--disable-improved-download-protection',
+      '--load-extension=/opt/voice-specs/lib/ember.js'
+    ]
   })
 end
 

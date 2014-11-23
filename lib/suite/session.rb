@@ -73,6 +73,6 @@ class Session
   rescue => e
     debug_error(e)
   ensure
-    Capybara.reset_sessions!
+  # Capybara.reset_sessions!
   end
 end
