@@ -13,6 +13,9 @@
 # Invoke it with the number of calls to be made:
 # > script/replay-events 100
 #
+# To manually step through the messages by pressing <CR>, use
+# > DEBUG=1 SYNC_STEPS=1 script/replay-events 2
+#
 # When you login as admin or with the agent's credentials you will
 # see the calls being queued and received.
 # The number of simultaneous calls is primarily limited by the
