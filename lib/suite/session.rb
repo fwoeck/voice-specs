@@ -69,6 +69,9 @@ class Session
     as_admin_grant_agent(2)
     as_admin_revoke_agent(2)
 
+    create_fake_customers(10)
+    # replay 2 event chains
+
     read_exit_confirmation
   rescue => e
     debug_error(e)

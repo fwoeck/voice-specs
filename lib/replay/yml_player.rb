@@ -40,10 +40,15 @@ class YmlPlayer
 
   def send_messages_for(lo)
     interpolate_sample_data
-    sleep 0.01 while lo.time + dt > Time.now
+    wait_for_next_step(lo)
 
     store_object_in_redis
     AmqpManager.publish(dump, lo.custom, lo.numbers)
+  end
+
+
+  def wait_for_next_step(lo)
+    sleep 0.01 while lo.time + dt > Time.now
   end
 
 
@@ -78,10 +83,10 @@ class YmlPlayer
     @cust  = _cust
     @agent = _agent
 
-    @tn    = Time.now
-    @tm    = Digest::MD5.hexdigest((rand(0.9) + tn.to_f).to_s)[0..11]
-    @t0    = log.first.time
-    @dt    = tn - t0
+    @tn = Time.now
+    @tm = Digest::MD5.hexdigest((rand(0.9) + tn.to_f).to_s)[0..11]
+    @t0 = log.first.time
+    @dt = tn - t0
   end
 
 

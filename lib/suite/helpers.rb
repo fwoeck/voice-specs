@@ -265,4 +265,9 @@ module Helpers
       expect(expect_js "#{GET}('user', #{aid}).get('#{key}')" ).to eql(val)
     }
   end
+
+
+  def create_fake_customers(num=1)
+    system "curl -s 'https://127.0.0.1/seed/customers?count=#{num}'"
+  end
 end
