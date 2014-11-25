@@ -1,5 +1,6 @@
 require 'pry'
 require 'rspec'
+require 'open3'
 require 'io/console'
 require 'rspec/expectations'
 

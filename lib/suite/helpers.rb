@@ -1,7 +1,7 @@
 POS    =  Struct.new(:x, :y)
 ALL    = 'Voice.store.all'
 GET    = 'Voice.store.getById'
-POS_N  = [0, 1, 2, 3, 4, 5].cycle
+POS_N  =  [0, 1, 2, 3, 4, 5].cycle
 DIALOG = 'Voice.dialogController'
 
 
@@ -264,10 +264,5 @@ module Helpers
     ].each { |key, val|
       expect(expect_js "#{GET}('user', #{aid}).get('#{key}')" ).to eql(val)
     }
-  end
-
-
-  def create_fake_customers(num=1)
-    system "curl -s 'https://127.0.0.1/seed/customers?count=#{num}'"
   end
 end

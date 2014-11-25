@@ -118,19 +118,15 @@ class YmlPlayer
 
 
   def self.trigger_next_step
-    sleep 0.05
+    STDIN.readline
     SyncQueues.each { |q| q.push 1 }
   end
 
 
   def self.sync_steps
     Thread.new {
-      trigger_next_step
-
-      while SyncQueues.size > 0 do
-        STDIN.readline
-        trigger_next_step
-      end
+      sleep 0.05
+      trigger_next_step while SyncQueues.size > 0
     }
   end
 

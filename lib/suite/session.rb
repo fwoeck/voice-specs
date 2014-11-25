@@ -5,6 +5,7 @@ class Session
 
   include Helpers
   include FormHelpers
+  include ReplayHelpers
   include Capybara::DSL
   include RSpec::Matchers
 
@@ -70,12 +71,12 @@ class Session
     as_admin_revoke_agent(2)
 
     create_fake_customers(10)
-    # replay 2 event chains
+    replay_captured_events
 
     read_exit_confirmation
   rescue => e
     debug_error(e)
   ensure
-  # Capybara.reset_sessions!
+    Capybara.reset_sessions!
   end
 end
