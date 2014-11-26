@@ -6,7 +6,10 @@ Bundler.setup
 require './lib/suite/setup'
 require './lib/suite/helpers'
 require './lib/suite/form_helpers'
+require './lib/suite/replay_helpers'
 require './lib/suite/session'
+
+Thread.abort_on_exception = true
 
 if (SpecConfig['rails_env'] != 'development') && !ENV['FORCE_SUITE']
   puts 'Running these specs will wipe all databases.'

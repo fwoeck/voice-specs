@@ -5,6 +5,7 @@ class Session
 
   include Helpers
   include FormHelpers
+  include ReplayHelpers
   include Capybara::DSL
   include RSpec::Matchers
 
@@ -68,6 +69,9 @@ class Session
     update_my_settings_as(1)
     as_admin_grant_agent(2)
     as_admin_revoke_agent(2)
+
+    create_fake_customers(10)
+    replay_captured_events
 
     read_exit_confirmation
   rescue => e

@@ -1,9 +1,16 @@
-class YmlPlayer
+require 'thread'
 
-  attr_reader :log, :tn, :tm, :t0, :dt, :obj, :dump, :agent, :cust
+class YmlPlayer
+  SyncQueues = ThreadSafe::Array.new
+
+  attr_reader :log, :tn, :tm, :t0, :dt, :obj,
+              :dump, :agent, :cust, :queue
 
 
   def initialize(filename='./fixtures/successful-call.yml')
+    @queue = Queue.new
+    SyncQueues << queue
+
     @log = YAML.load_file(filename)
     log.each { |lo| lo.data = Marshal.load(lo.data) }
   end
@@ -40,10 +47,20 @@ class YmlPlayer
 
   def send_messages_for(lo)
     interpolate_sample_data
-    sleep 0.01 while lo.time + dt > Time.now
+    wait_for_next_step(lo)
 
     store_object_in_redis
+    print obj.inspect + "\n" if ENV['DEBUG']
     AmqpManager.publish(dump, lo.custom, lo.numbers)
+  end
+
+
+  def wait_for_next_step(lo)
+    if ENV['SYNC_STEPS']
+      queue.pop
+    else
+      sleep 0.01 while lo.time + dt > Time.now
+    end
   end
 
 
@@ -78,10 +95,10 @@ class YmlPlayer
     @cust  = _cust
     @agent = _agent
 
-    @tn    = Time.now
-    @tm    = Digest::MD5.hexdigest((rand(0.9) + tn.to_f).to_s)[0..11]
-    @t0    = log.first.time
-    @dt    = tn - t0
+    @tn = Time.now
+    @tm = Digest::MD5.hexdigest((rand(0.9) + tn.to_f).to_s)[0..11]
+    @t0 = log.first.time
+    @dt = tn - t0
   end
 
 
@@ -94,7 +111,22 @@ class YmlPlayer
         replay_capture_data
         tag_history_entry
         print "Finish agent ##{agent.name} with caller ##{cust}\n"
+        SyncQueues.delete(queue)
       }
+    }
+  end
+
+
+  def self.trigger_next_step
+    STDIN.readline
+    SyncQueues.each { |q| q.push 1 }
+  end
+
+
+  def self.sync_steps
+    Thread.new {
+      sleep 0.05
+      trigger_next_step while SyncQueues.size > 0
     }
   end
 
@@ -103,9 +135,10 @@ class YmlPlayer
     threads = []
 
     count.times do |idx|
-      sleep 3 * rand(0.9)
       threads << Thread.new { YmlPlayer.new.start }
     end
+
+    sync_steps if ENV['SYNC_STEPS']
     threads.map(&:join)
   end
 end

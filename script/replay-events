@@ -13,11 +13,46 @@
 # Invoke it with the number of calls to be made:
 # > script/replay-events 100
 #
+# To manually step through the messages by pressing <CR>, use
+# > DEBUG=1 SYNC_STEPS=1 script/replay-events 2
+#
 # When you login as admin or with the agent's credentials you will
 # see the calls being queued and received.
 # The number of simultaneous calls is primarily limited by the
 # count of agents, because the script replays the call-sequence
 # to an agent only once at a time.
+#
+# These are the 16 recorded events:
+#
+# 01/16 Set the agent's visibility: online, activity: silent
+# 02/16 Set the customer's (agent 999) activity: talking
+# 03/16 Create the customer's call leg with call_id, extension: 0 and caller_id
+# 04/16 Set the c' call language
+# 05/16 Set the c' call skill
+# 06/16 Set the c' call queued_at
+# 07/16 Create the agent's call leg with origin_id and other fields
+# 08/16 Set the agent's activity: ringing
+# 09/16 Repeat 07/16 (seems unnecessary)
+# 10/16 Set the agent's activity: talking
+# 11/16 Set the agent call leg's call_tag and dispatched_at
+# 12/16 Set the customer call leg's call_tag and dispatched_at
+# 13/16 Set the agent's activity: silent
+# 14/16 Set the agent call leg's hungup_at
+# 15/16 Set the customer call leg's hungup_at
+# 16/16 Set the customers's activity: silent
+#
+# To refresh this recording:
+# - stop the VA service and start the ahn console:
+#   > CAPTURE=1 ahn start .
+# - login to the front-end as agent 101
+# - call to number 00 as admin (default 999)
+# - choose any language and skill
+# - take the call as agent 101
+# - after some seconds, hangup the call as agent 101
+# - from the ahn console:
+#   > AmqpManager.dump_log
+# This will write a new yml-file with the recorded
+# events.
 
 require 'bundler'
 Bundler.setup

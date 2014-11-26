@@ -1,7 +1,7 @@
 POS    =  Struct.new(:x, :y)
 ALL    = 'Voice.store.all'
 GET    = 'Voice.store.getById'
-POS_N  = [0, 1, 2, 3, 4, 5].cycle
+POS_N  =  [0, 1, 2, 3, 4, 5].cycle
 DIALOG = 'Voice.dialogController'
 
 
@@ -180,10 +180,15 @@ module Helpers
 
   def get_agent_id_for(num)
     expect(aid = expect_js(
-      "#{ALL}('user').findProperty('name', '#{agents[num][:ext]}').get('id')"
+      "#{find_js_user_by_name agents[num][:ext]}.get('id')"
     ).to_i).to be > 1
 
     [num, aid]
+  end
+
+
+  def find_js_user_by_name(val)
+    "Voice.User.findByName('#{val}')"
   end
 
 
