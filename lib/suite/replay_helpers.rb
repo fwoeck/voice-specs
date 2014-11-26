@@ -8,6 +8,7 @@ module ReplayHelpers
 
   def replay_captured_events
     log 'Replay captured events:'
+
     Open3.popen3(replay_command) { |stdin, stdout, stderr, wait_thr|
       @std_in = stdin
       step_through_captured_events
@@ -30,11 +31,42 @@ module ReplayHelpers
 
   def conduct_step_02
     conduct_step "02/16 Set the customer's (agent 999) activity: talking."
+
+    with_all_sessions do
+      expect_with_retry('talking') {
+        expect_js "#{find_js_user_by_name admin_name}.get('activity')"
+      }
+    end
+  end
+
+
+  def call_count
+    "#{ALL}('call').get('length')"
   end
 
 
   def conduct_step_03
     conduct_step "03/16 Create the customer's call leg with call_id, extension, caller_id."
+
+    check_admin_session_for_calls
+    [1, 2].each { |num| check_agent_session_for_no_calls(num) }
+  end
+
+
+  def check_admin_session_for_calls
+    use_client admin_name
+    activate_dashboard
+
+    expect_with_retry(2) { expect_js call_count }
+    expect(find '#my_settings > h5 > span.stats').to have_text "I'm currently talking."
+    expect(expect_js '$("#callstats_table .callstats_table").length').to eq 2
+  end
+
+
+  def check_agent_session_for_no_calls(num)
+    use_client agents[num][:ext]
+    activate_dashboard
+    expect_with_retry(0) { expect_js call_count }
   end
 
 
@@ -50,6 +82,28 @@ module ReplayHelpers
 
   def conduct_step_06
     conduct_step "06/16 Set the customer's call queued_at."
+
+    [1, 2].each { |num|
+      check_agent_session_for_one_call(num)
+      check_incoming_call_fields
+    }
+    binding.pry
+  end
+
+
+  def check_agent_session_for_one_call(num)
+    use_client agents[num][:ext]
+    expect_with_retry(1) { expect_js call_count }
+    expect(expect_js '$("#callstats_table .callstats_table").length').to eq 1
+  end
+
+
+  def check_incoming_call_fields
+    lang = eval_js "#{ALL}('call').get('firstObject.language')"
+    expect(expect_js 'Voice.get("currentUser.languages")').to include lang
+
+    skill = eval_js "#{ALL}('call').get('firstObject.skill')"
+    expect(expect_js 'Voice.get("currentUser.skills")').to include skill
   end
 
 

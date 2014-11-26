@@ -180,10 +180,15 @@ module Helpers
 
   def get_agent_id_for(num)
     expect(aid = expect_js(
-      "#{ALL}('user').findProperty('name', '#{agents[num][:ext]}').get('id')"
+      "#{find_js_user_by_name agents[num][:ext]}.get('id')"
     ).to_i).to be > 1
 
     [num, aid]
+  end
+
+
+  def find_js_user_by_name(val)
+    "Voice.User.findByName('#{val}')"
   end
 
 
