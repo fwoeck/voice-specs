@@ -50,8 +50,8 @@ class Session
     if ENV['RUN_PRY']
       binding.pry
     else
-      puts 'Press a key to close all sessions and exit.'
-      STDIN.getch
+      # puts 'Press a key to close all sessions and exit.'
+      # STDIN.getch
     end
   end
 
