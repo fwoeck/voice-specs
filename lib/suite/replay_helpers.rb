@@ -87,7 +87,6 @@ module ReplayHelpers
       check_agent_session_for_one_call(num)
       check_incoming_call_fields
     }
-    binding.pry
   end
 
 
@@ -114,6 +113,11 @@ module ReplayHelpers
 
   def conduct_step_08
     conduct_step "08/16 Set the agent's activity: ringing."
+
+    [1, 2].each { |num|
+      use_client agents[num][:ext]
+      expect(find '#my_settings > h5 > span.stats').to have_text "I'm receiving a call."
+    }
   end
 
 
@@ -124,6 +128,11 @@ module ReplayHelpers
 
   def conduct_step_10
     conduct_step "10/16 Set the agent's activity: talking."
+
+    [1, 2].each { |num|
+      use_client agents[num][:ext]
+      expect(find '#my_settings > h5 > span.stats').to have_text "I'm currently talking."
+    }
   end
 
 
@@ -134,7 +143,17 @@ module ReplayHelpers
 
   def conduct_step_12
     conduct_step "12/16 Set the customer call leg's call_tag and dispatched_at."
-    sleep 5
+    binding.pry
+
+    # as agent:
+    # - add a remark, add a tag
+    # - add " (test)" to name, save
+    # - opt. create Zendesk user/ticket
+    #
+    # as admin check:
+    # - dashboard / show dispatched
+    # - customers / some patterns, remark, tags
+    # - stats / active, dipatched calls
   end
 
 
